@@ -22,25 +22,24 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 	private GestorSolicitud() {}
 
 	
-	private SolicitudDaoImp solicitudRepo;
+	private SolicitudDaoImp solicitudRepo= SolicitudDaoImp.getInstance();
 
 
-	private BecaAprobadaDaoImp becaAprobadaRepo;
+	private BecaAprobadaDaoImp becaAprobadaRepo= BecaAprobadaDaoImp.getInstance();
 
 	
-	private GestorAlumno alumnoService;
+	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 
 	@Override
 	public Optional<Solicitud> guardarSolicitud(Solicitud solicitud) {
-		/*if (solicitud.getAlumnoSolicitante() == null || solicitud.getClasificacionSolicitud() == null) {
+		if (solicitud.getAlumnoSolicitante() == null || solicitud.getClasificacionSolicitud() == null) {
 			return Optional.empty();
 		}
 		Solicitud solicitudGuar = solicitudRepo.save(solicitud);
 		if (solicitudGuar != null) {
 			return Optional.of(solicitudGuar);
 		}
-		return Optional.empty();*/
-		return null;
+		return Optional.empty();
 	}
 
 	/*
@@ -49,7 +48,7 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 	 */
 	@Override
 	public Optional<Solicitud> agregarBecaAprobada(Solicitud solicitud, BecaAprobada becaAprobada) {
-		/*if (becaAprobadaRepo.save(becaAprobada) != null) {
+		if (becaAprobadaRepo.save(becaAprobada) != null) {
 			solicitud.setBecaAprobada(becaAprobada);
 			becaAprobada.setSolicitud(solicitud);
 			// Solicitud es dueña de la relacion por lo tanto la guarda
@@ -58,8 +57,8 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 				return Optional.of(solicitudReturn);
 			}
 		}
-		return Optional.empty();*/
-		return null;
+		return Optional.empty();
+		
 	}
 
 	/*
@@ -68,7 +67,7 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 	 */
 	@Override
 	public ClasificacionSolicitud clasificarSolicitud(Solicitud solicitud) {
-		/*Double sumaIngresoNetoFamiliar = alumnoService.getIngresoFamiliarTotal(solicitud.getAlumnoSolicitante());
+		Double sumaIngresoNetoFamiliar = alumnoService.getIngresoFamiliarTotal(solicitud.getAlumnoSolicitante());
 		if (sumaIngresoNetoFamiliar == null) {
 			System.out
 					.println("[Debug-SolicitudServiceImp-clasificarSolicitud]: la suma del ingreso familiar es nula\n");
@@ -87,8 +86,8 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 		}
 		Integer cantidadHermanos = alumnoService.getCantidadHermanos(solicitud.getAlumnoSolicitante());
 
-		return analizarSolicitud(diferenciaIngresoGasto, cantidadHermanos);*/
-		return null;
+		return analizarSolicitud(diferenciaIngresoGasto, cantidadHermanos);
+	
 	}
 
 	/*
