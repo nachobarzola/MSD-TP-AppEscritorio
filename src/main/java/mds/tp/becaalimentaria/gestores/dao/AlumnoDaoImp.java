@@ -1,5 +1,7 @@
 package mds.tp.becaalimentaria.gestores.dao;
 
+
+
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -25,7 +27,7 @@ public class AlumnoDaoImp implements AlumnoDao{
 	private AlumnoDaoImp() {}
 	
 	
-	public Alumno save(Alumno alumno) {
+	public Optional<Alumno> save(Alumno alumno) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = null;
 		try {
@@ -33,15 +35,16 @@ public class AlumnoDaoImp implements AlumnoDao{
 			et.begin();
 						
 			em.persist(alumno);
+			em.flush(); //Actualiza el contexto
 			et.commit();
-			return alumno;
+			return Optional.of(alumno);
 			
 		}catch (Exception ex) {
 			if (et != null) {
 				et.rollback();
 			}
 			ex.printStackTrace();
-			return null;
+			return Optional.empty();
 		}
 		finally {
 			em.close();
