@@ -14,7 +14,7 @@ import mds.tp.becaalimentaria.gestores.interfaces.GestorEscuelaInterface;
 public class GestorEscuela implements GestorEscuelaInterface {
 	private static GestorEscuela _INSTANCE;
 
-	public GestorEscuela getInstance() {
+	public static GestorEscuela getInstance() {
 		if (_INSTANCE == null) {
 			_INSTANCE = new GestorEscuela();
 		}
@@ -29,12 +29,13 @@ public class GestorEscuela implements GestorEscuelaInterface {
 
 	@Override
 	public Optional<Escuela> guardarEscuela(Escuela escuela) {
-		return Optional.of(repoEscuela.save(escuela));
+		//return Optional.of(repoEscuela.save(escuela));
+		return null;
 	}
 
 	@Override
 	public Optional<Escuela> loginEscuela(String codidoUnicoEstablecimiento, String clave) {
-		System.out.println("ENTRO COMO LOCO");
+		/*
 		Escuela escuela = repoEscuela.findByCodigoUnicoEstablecimiento(codidoUnicoEstablecimiento);
 		// Existe esa escuela
 		if (escuela != null) {
@@ -43,7 +44,8 @@ public class GestorEscuela implements GestorEscuelaInterface {
 			}
 
 		}
-		return Optional.empty();
+		return Optional.empty();*/
+		return null;
 	}
 	
 	

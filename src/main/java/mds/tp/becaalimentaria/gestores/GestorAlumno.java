@@ -8,7 +8,6 @@ import mds.tp.becaalimentaria.domain.Direccion;
 import mds.tp.becaalimentaria.domain.EnfermedadCronica;
 import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.domain.GrupoFamiliar;
-import mds.tp.becaalimentaria.domain.Hermano;
 import mds.tp.becaalimentaria.domain.ProgenitorTutor;
 import mds.tp.becaalimentaria.gestores.dao.AlumnoDaoImp;
 import mds.tp.becaalimentaria.gestores.dao.DireccionDaoImp;
@@ -22,7 +21,7 @@ import mds.tp.becaalimentaria.gestores.interfaces.GestorAlumnoInterface;
 public class GestorAlumno implements GestorAlumnoInterface{
 	private static GestorAlumno _INSTANCE;
 	
-	public GestorAlumno getInstance() {
+	public static GestorAlumno getInstance() {
 		if(_INSTANCE == null) {
 			_INSTANCE = new GestorAlumno();
 		}
@@ -55,7 +54,7 @@ public class GestorAlumno implements GestorAlumnoInterface{
 	
 	@Override
 	public Optional<Alumno> guardarAlumno(Alumno alumno) {
-		Alumno alumnoRetur = alumnoRepo.save(alumno);
+		Alumno alumnoRetur = alumnoRepo.getInstance().save(alumno);
 		return Optional.of(alumnoRetur);
 	}
 
@@ -73,18 +72,20 @@ public class GestorAlumno implements GestorAlumnoInterface{
 
 	@Override
 	public Optional<Alumno> getAlumno(Integer id) {
-		return alumnoRepo.findById(id);
+		//return alumnoRepo.findById(id);
+		return null;
 		
 	}
 
 	@Override
 	public Optional<Direccion> guardarDireccion(Direccion direccion) {
-		return Optional.of(direccionRepo.save(direccion));
+		//return Optional.of(direccionRepo.save(direccion));
+		return null;
 	}
 
 	@Override
 	public Optional<Alumno> agregarEscuelaAlumno(Escuela escuela, Integer idAlumno) {
-		Optional<Alumno> optAlumno = alumnoRepo.findById(idAlumno);
+		/*Optional<Alumno> optAlumno = alumnoRepo.findById(idAlumno);
 		if(optAlumno.isPresent()) {
 			Alumno alumno = optAlumno.get();
 			alumno.setEscuela(escuela);
@@ -92,12 +93,13 @@ public class GestorAlumno implements GestorAlumnoInterface{
 			return Optional.of(alumnoRepo.save(alumno));
 		}
 		
-		return Optional.empty();
+		return Optional.empty();*/
+		return null;
 	}
 
 	@Override
 	public Optional<Alumno> agregarGrupoFamiliarAAlumno(GrupoFamiliar grupFamiliar, Integer idAlumno) {
-		Optional<Alumno> optAlumno = alumnoRepo.findById(idAlumno);
+		/*Optional<Alumno> optAlumno = alumnoRepo.findById(idAlumno);
 		if(optAlumno.isPresent()) {
 			Alumno alumno = optAlumno.get();
 			//Verificamos si el grupo familiar existe
@@ -106,12 +108,13 @@ public class GestorAlumno implements GestorAlumnoInterface{
 				return Optional.of(alumnoRepo.save(alumno));
 			}
 		}
-		return Optional.empty();
+		return Optional.empty();*/
+		return null;
 	}
 
 	@Override
 	public Optional<GrupoFamiliar> guardarGrupoFamiliar(GrupoFamiliar grupoFamiliar) {
-		if(grupoFamiliarRepo.save(grupoFamiliar) != null) {
+		/*if(grupoFamiliarRepo.save(grupoFamiliar) != null) {
 			if(grupoFamiliar.getListaHermano().size() > 0) {
 				//tiene hermanos, Los que guardan la relacion es la clase hermano
 				//Debo guardar relacion por cada hermano
@@ -136,7 +139,8 @@ public class GestorAlumno implements GestorAlumnoInterface{
 			return Optional.of(grupoFamiliar);
 		}
 		
-		return Optional.empty();
+		return Optional.empty();*/
+		return null;
 	}
 
 	@Override
