@@ -19,6 +19,7 @@ public class ProgenitorTutor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //valor autonumerico
 	@Column(name="ID_PROGENITOR")
 	private Integer id;
+	
 	private String nombre;
 	private String apellido;
 	private Double ingresoNeto;

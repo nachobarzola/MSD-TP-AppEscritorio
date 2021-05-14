@@ -8,6 +8,7 @@ import mds.tp.becaalimentaria.domain.Direccion;
 import mds.tp.becaalimentaria.domain.EnfermedadCronica;
 import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.domain.GrupoFamiliar;
+import mds.tp.becaalimentaria.domain.Hermano;
 import mds.tp.becaalimentaria.domain.ProgenitorTutor;
 import mds.tp.becaalimentaria.gestores.dao.AlumnoDaoImp;
 import mds.tp.becaalimentaria.gestores.dao.DireccionDaoImp;
@@ -32,21 +33,6 @@ public class GestorAlumno implements GestorAlumnoInterface{
 	private GestorAlumno() {}
 	
 	
-	//----------------Repositorios - Acceso a datos.
-
-
-	
-	
-	private GrupoFamiliarDaoImp grupoFamiliarRepo;
-	
-	
-	private HermanoDaoImp hermanoRepo;
-	
-	
-	private ProgenitorTutorDaoImp progenitorTutorRepo;
-	
-	
-	private EnfermedadCronicaDaoImp enfermedadCronicaRepo;
 	//---------------------------------------------------
 	
 	@Override
@@ -92,48 +78,47 @@ public class GestorAlumno implements GestorAlumnoInterface{
 
 	@Override
 	public Optional<Alumno> agregarGrupoFamiliarAAlumno(GrupoFamiliar grupFamiliar, Integer idAlumno) {
-		/*Optional<Alumno> optAlumno = alumnoRepo.findById(idAlumno);
+		Optional<Alumno> optAlumno = AlumnoDaoImp.getInstance().findById(idAlumno);
 		if(optAlumno.isPresent()) {
 			Alumno alumno = optAlumno.get();
 			//Verificamos si el grupo familiar existe
-			if(grupoFamiliarRepo.findById(grupFamiliar.getId()) != null) {
+			if(GrupoFamiliarDaoImp.getInstance().findById(grupFamiliar.getId()) != null) {
 				alumno.setGrupoFamiliar(grupFamiliar);
-				return Optional.of(alumnoRepo.save(alumno));
+				return AlumnoDaoImp.getInstance().actualizar(alumno);
 			}
 		}
-		return Optional.empty();*/
-		return null;
+		return Optional.empty();
+	
 	}
 
 	@Override
 	public Optional<GrupoFamiliar> guardarGrupoFamiliar(GrupoFamiliar grupoFamiliar) {
-		/*if(grupoFamiliarRepo.save(grupoFamiliar) != null) {
+		if(GrupoFamiliarDaoImp.getInstance().save(grupoFamiliar) != null) {
 			if(grupoFamiliar.getListaHermano().size() > 0) {
 				//tiene hermanos, Los que guardan la relacion es la clase hermano
 				//Debo guardar relacion por cada hermano
 				for(Hermano unHer: grupoFamiliar.getListaHermano()) {
-					hermanoRepo.save(unHer);
+					HermanoDaoImp.getInstance().save(unHer);
 				}
 			}
 			if(grupoFamiliar.getListaProgenitorTutor().size() > 0) {
 				//Tiene progenitor, Los que guardan la relacion es la clase progenitorTutor
 				//Debo guardar relacion por cada progenitorTutor
 				for(ProgenitorTutor unProg: grupoFamiliar.getListaProgenitorTutor()) {
-					progenitorTutorRepo.save(unProg);
+					ProgenitorTutorDaoImp.getInstance().save(unProg);
 				}
 			}
 			if(grupoFamiliar.getListaEnfermedadCronica().size() > 0) {
 				//Tiene EnfermedadCronica, Los que guardan la relacion es la clase EnfermedadCronica
 				//Debo guardar relacion por cada EnfermedadCronica
 				for(EnfermedadCronica unaEnf: grupoFamiliar.getListaEnfermedadCronica()) {
-					enfermedadCronicaRepo.save(unaEnf);
+					EnfermedadCronicaDaoImp.getInstance().save(unaEnf);
 				}
 			}
 			return Optional.of(grupoFamiliar);
 		}
 		
-		return Optional.empty();*/
-		return null;
+		return Optional.empty();
 	}
 
 	@Override
