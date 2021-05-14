@@ -1,11 +1,15 @@
 package mds.tp.becaalimentaria.gestores.dao;
 
 
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
+import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.gestores.dao.interfaces.EscuelaDao;
 
@@ -46,6 +50,23 @@ private static EscuelaDaoImp _INSTANCE;
 		finally {
 			em.close();
 		}
+	}
+
+	@Override
+	public Optional<Escuela> findById(Integer idEscuela) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = null;
+		Escuela escuela = null;
+		try {
+			et = em.getTransaction();
+			et.begin();
+			escuela = em.find(Escuela.class, idEscuela);
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return Optional.of(escuela);
 	}
 
 }
