@@ -16,7 +16,16 @@ mapped to database tables. Database driver, location, userid and pw
         <!-- Define the class for Hibernate which implements JPA -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!-- Define the object that should be persisted in the database -->
-        <class>mds.tp.becaalimentaria.domain</class>
+        <class>mds.tp.becaalimentaria.domain.Alumno</class>
+        <class>mds.tp.becaalimentaria.domain.BecaAprobada</class>
+        <class>mds.tp.becaalimentaria.domain.Direccion</class>
+        <class>mds.tp.becaalimentaria.domain.EnfermedadCronica</class>
+        <class>mds.tp.becaalimentaria.domain.Escuela</class>
+        <class>mds.tp.becaalimentaria.domain.GrupoFamiliar</class>
+        <class>mds.tp.becaalimentaria.domain.Hermano</class>
+        <class>mds.tp.becaalimentaria.domain.ProgenitorTutor</class>
+        <class>mds.tp.becaalimentaria.domain.Solicitud</class>
+     
         
         <properties>
             <!-- Driver for DB database -->

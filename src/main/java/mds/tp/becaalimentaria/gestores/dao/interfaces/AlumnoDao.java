@@ -6,6 +6,10 @@ import mds.tp.becaalimentaria.domain.Alumno;
 
 public interface AlumnoDao {
 
-	public Optional<Alumno> save(Alumno alumno);
+	public Alumno save(Alumno alumno);
+	
+	public Optional<Alumno> actualizar(Alumno alumno);
+	
+	public Optional<Alumno> findById(Integer id);
 	
 }

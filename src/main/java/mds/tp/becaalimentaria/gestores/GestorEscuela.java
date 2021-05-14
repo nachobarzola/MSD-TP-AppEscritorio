@@ -25,12 +25,12 @@ public class GestorEscuela implements GestorEscuelaInterface {
 	}
 	
 	
-	private EscuelaDaoImp repoEscuela;
+	
 
 	@Override
 	public Optional<Escuela> guardarEscuela(Escuela escuela) {
-		//return Optional.of(repoEscuela.save(escuela));
-		return null;
+		return Optional.of(EscuelaDaoImp.getInstance().save(escuela));
+	
 	}
 
 	@Override

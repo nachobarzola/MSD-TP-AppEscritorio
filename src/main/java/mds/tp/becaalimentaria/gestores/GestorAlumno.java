@@ -34,10 +34,7 @@ public class GestorAlumno implements GestorAlumnoInterface{
 	
 	//----------------Repositorios - Acceso a datos.
 
-	private AlumnoDaoImp alumnoRepo;
-	
-	
-	private DireccionDaoImp direccionRepo;
+
 	
 	
 	private GrupoFamiliarDaoImp grupoFamiliarRepo;
@@ -54,7 +51,7 @@ public class GestorAlumno implements GestorAlumnoInterface{
 	
 	@Override
 	public Optional<Alumno> guardarAlumno(Alumno alumno) {
-		Alumno alumnoRetur = alumnoRepo.getInstance().save(alumno);
+		Alumno alumnoRetur = AlumnoDaoImp.getInstance().save(alumno);
 		return Optional.of(alumnoRetur);
 	}
 
@@ -66,35 +63,31 @@ public class GestorAlumno implements GestorAlumnoInterface{
 
 	@Override
 	public Optional<Alumno> actualizarAlumno(Alumno alumno) {
-		// TODO Auto-generated method stub
-		return null;
+		return AlumnoDaoImp.getInstance().actualizar(alumno);
 	}
 
 	@Override
 	public Optional<Alumno> getAlumno(Integer id) {
-		//return alumnoRepo.findById(id);
-		return null;
+		return AlumnoDaoImp.getInstance().findById(id);
 		
 	}
 
 	@Override
 	public Optional<Direccion> guardarDireccion(Direccion direccion) {
-		//return Optional.of(direccionRepo.save(direccion));
-		return null;
+		return Optional.of(DireccionDaoImp.getInstance().save(direccion));
 	}
 
 	@Override
 	public Optional<Alumno> agregarEscuelaAlumno(Escuela escuela, Integer idAlumno) {
-		/*Optional<Alumno> optAlumno = alumnoRepo.findById(idAlumno);
+		Optional<Alumno> optAlumno = AlumnoDaoImp.getInstance().findById(idAlumno);
 		if(optAlumno.isPresent()) {
 			Alumno alumno = optAlumno.get();
 			alumno.setEscuela(escuela);
 			escuela.addAlumno(alumno);
-			return Optional.of(alumnoRepo.save(alumno));
+			return AlumnoDaoImp.getInstance().actualizar(alumno);
 		}
 		
-		return Optional.empty();*/
-		return null;
+		return Optional.empty();
 	}
 
 	@Override
