@@ -1,6 +1,5 @@
 package mds.tp.becaalimentaria.presentacion;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,10 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JScrollPane;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
-import javax.swing.JSeparator;
 import javax.swing.JButton;
 
 public class AltaGrupoFamiliar extends JFrame {

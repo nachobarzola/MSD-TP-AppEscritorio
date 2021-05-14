@@ -5,16 +5,20 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
+import mds.tp.becaalimentaria.domain.Escuela;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Optional;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 
 
@@ -22,8 +26,9 @@ public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField campoCodigo;
-	private JTextField campoClave;
+	private JPasswordField campoClave;
 	private JLabel ingresando;
+	private JFrame loginFrame;
 
 	
 	/**
@@ -46,6 +51,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		this.loginFrame=this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -59,6 +65,7 @@ public class Login extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Clave: ");
 		lblNewLabel_1.setBounds(127, 109, 46, 14);
+		
 		contentPane.add(lblNewLabel_1);
 		
 		campoCodigo = new JTextField();
@@ -66,8 +73,10 @@ public class Login extends JFrame {
 		contentPane.add(campoCodigo);
 		campoCodigo.setColumns(10);
 		
-		campoClave = new JTextField();
+		campoClave = new JPasswordField();
 		campoClave.setBounds(192, 106, 86, 20);
+		campoClave.setToolTipText("");
+		campoClave.setEchoChar('*');
 		contentPane.add(campoClave);
 		campoClave.setColumns(10);
 		
@@ -85,8 +94,29 @@ public class Login extends JFrame {
 		        ingresando.setVisible(true);
 		        //campoCodigo.getText();
 		        //campoClave.getText();
-		        	        
-		       
+		        
+		        //TODO: borrar desp
+		        Escuela escuela = new Escuela();
+		        escuela.setCodigoUnicoEstablecimiento("123");
+		        escuela.setClave("123");
+		        escuela.setNombre("Pablo A Pizzurno");
+		        escuelaService.guardarEscuela(escuela);
+		        
+		        Optional<Escuela> optEscuela = escuelaService.loginEscuela(campoCodigo.getText(),campoClave.getText());
+		        
+		        if (optEscuela.isPresent()) {
+		        	MenuJFrame menu = new MenuJFrame(optEscuela.get());
+		        	menu.setVisible(true);
+		        	
+		        	loginFrame.dispose();
+		        }
+		        else {
+		        	JOptionPane.showMessageDialog(loginFrame,
+		        	    "Ingrese una código y clave correctas",
+		        	    "Error",
+		        	    JOptionPane.ERROR_MESSAGE);
+		        }
+		        
 		}  
 		});  
 		
