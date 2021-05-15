@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,7 +51,7 @@ public class Alumno {
 	@OneToMany(mappedBy = "alumnoSolicitante")
 	private List<Solicitud> solicitudes;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="ID_DIRECCION")
 	private Direccion direccion;
 

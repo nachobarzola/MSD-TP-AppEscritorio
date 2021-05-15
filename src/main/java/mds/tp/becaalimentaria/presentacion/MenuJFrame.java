@@ -36,7 +36,9 @@ public class MenuJFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(cardLayout);
-		
+		JLabel labelEscuela = new JLabel();
+		labelEscuela.setText(escuela.getNombre());
+		labelEscuela.setBounds(127, 109, 46, 14); //MODIFICAR ESTO PQ NO PUEDO ABRIRLO CON EL W BUILDER
 		MenuJPanel menuJPanel= new MenuJPanel(frame, escuela);
 		contentPane.add(menuJPanel, "1");
 		

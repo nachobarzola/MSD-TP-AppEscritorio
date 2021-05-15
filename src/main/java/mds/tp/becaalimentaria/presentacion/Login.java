@@ -22,9 +22,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 
-
 public class Login extends JFrame {
-
+	
 	private JPanel contentPane;
 	private JTextField campoCodigo;
 	private JPasswordField campoClave;
@@ -126,4 +125,5 @@ public class Login extends JFrame {
 		
 		this.setVisible(true);
 	}
+	
 }

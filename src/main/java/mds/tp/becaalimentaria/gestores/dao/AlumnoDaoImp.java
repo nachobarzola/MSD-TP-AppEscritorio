@@ -1,5 +1,6 @@
 package mds.tp.becaalimentaria.gestores.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -7,8 +8,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import mds.tp.becaalimentaria.domain.Alumno;
+import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.gestores.dao.interfaces.AlumnoDao;
 
 public class AlumnoDaoImp implements AlumnoDao {
@@ -95,5 +98,24 @@ public class AlumnoDaoImp implements AlumnoDao {
 		}
 		return Optional.of(alumno);
 	}
+	
+	
+	public List<Alumno> getAlumnosEscuelaCombo(String idEscuela) {
+		EntityManager em = emf.createEntityManager();
+		String query = "SELECT a FROM Alumno a WHERE a.id_escuela = :idEscuela";
+		TypedQuery<Alumno> aluTq = em.createQuery(query,Alumno.class);
+		aluTq.setParameter("idEscuela", idEscuela);
+		List<Alumno> alu = null;
+		try {
+			alu = aluTq.getResultList();
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+		} finally {
+			em.close();
+		}
+
+		return alu;
+	}
+
 
 }

@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import mds.tp.becaalimentaria.gestores.GestorAlumno;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -129,9 +132,13 @@ public class AltaGrupoFamiliar extends JFrame {
 		lblNewLabel_9.setBounds(59, 84, 101, 14);
 		contentPane.add(lblNewLabel_9);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(175, 80, 99, 22);
-		contentPane.add(comboBox);
+		JComboBox comboAlumno = new JComboBox();
+		comboAlumno.setBounds(175, 80, 99, 22);
+		
+		GestorAlumno alumnoService = GestorAlumno.getInstance();
+		//agregar aca lo que recibe el combo
+		
+		contentPane.add(comboAlumno);
 		
 		JButton btnNewButton = new JButton("(+) Agregar progenitor/tutor");
 		btnNewButton.setBounds(127, 375, 172, 23);
