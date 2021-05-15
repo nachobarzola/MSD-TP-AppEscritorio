@@ -9,6 +9,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import mds.tp.becaalimentaria.domain.Escuela;
+import mds.tp.becaalimentaria.gestores.GestorEscuela;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,8 @@ public class Login extends JFrame {
 	private JPasswordField campoClave;
 	private JLabel ingresando;
 	private JFrame loginFrame;
+	
+	private GestorEscuela escuelaService = GestorEscuela.getInstance();
 
 	
 	/**
@@ -92,16 +95,8 @@ public class Login extends JFrame {
 		btnIngresar.addActionListener(new ActionListener(){  
 			public void actionPerformed(ActionEvent e){  
 		        ingresando.setVisible(true);
-		        //campoCodigo.getText();
-		        //campoClave.getText();
 		        
-		        //TODO: borrar desp
-		        Escuela escuela = new Escuela();
-		        escuela.setCodigoUnicoEstablecimiento("123");
-		        escuela.setClave("123");
-		        escuela.setNombre("Pablo A Pizzurno");
-		        escuelaService.guardarEscuela(escuela);
-		        
+		     
 		        Optional<Escuela> optEscuela = escuelaService.loginEscuela(campoCodigo.getText(),campoClave.getText());
 		        
 		        if (optEscuela.isPresent()) {

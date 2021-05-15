@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Direccion;
 import mds.tp.becaalimentaria.domain.Turno;
+import mds.tp.becaalimentaria.gestores.GestorAlumno;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,9 +23,7 @@ import java.util.Optional;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-
 public class AltaAlumnoJPanel extends JPanel {
-	
 
 	private JTextField tfApellido;
 	private JTextField tfNombre;
@@ -41,10 +40,13 @@ public class AltaAlumnoJPanel extends JPanel {
 	private JTextField tfLocalidad;
 	private JTextField tfEmail;
 	private JTextField tfTelefono;
-	private JFrame frame;
+	private JComboBox comboTurno;
+	private JFrame framePrincipal;
 
-	public AltaAlumnoJPanel(JFrame frame) {
-		this.frame = frame;
+	private GestorAlumno alumnoService = GestorAlumno.getInstance();
+
+	public AltaAlumnoJPanel( JFrame frame) {
+		this.framePrincipal = frame;
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 300, 519, 506);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -157,7 +159,7 @@ public class AltaAlumnoJPanel extends JPanel {
 		lblNewLabel_12.setBounds(57, 301, 46, 14);
 		this.add(lblNewLabel_12);
 
-		JComboBox comboTurno = new JComboBox();
+		comboTurno = new JComboBox();
 		comboTurno.setBounds(153, 259, 86, 22);
 		comboTurno.addItem("Mañana");
 		comboTurno.addItem("Tarde");
@@ -222,11 +224,11 @@ public class AltaAlumnoJPanel extends JPanel {
 				Optional<Alumno> optAlumnoReturn = alumnoService.guardarAlumno(alumno);
 				if (optAlumnoReturn.isPresent()) {
 					// guardado correctamente
-					JOptionPane.showMessageDialog(frame, "Alumno guardado correctamente", "Exito",
+					JOptionPane.showMessageDialog(framePrincipal, "Alumno guardado correctamente", "Exito",
 							JOptionPane.OK_OPTION);
 				} else {
 					// error
-					JOptionPane.showMessageDialog(frame, "No se pudo guardar el alumno", "Error",
+					JOptionPane.showMessageDialog(framePrincipal, "No se pudo guardar el alumno", "Error",
 							JOptionPane.ERROR_MESSAGE);
 
 				}

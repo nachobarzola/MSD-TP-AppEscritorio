@@ -18,7 +18,7 @@ public class GestorEscuelaTest {
 	@Test
 	public void guardar_buscar_escuela() {
 		//guardo la escuela
-		Escuela escuela = new Escuela("Cod2","Clav2");
+		Escuela escuela = new Escuela("Cod2","Clav2","Juan A");
 		Optional<Escuela> optEsc = escuelaService.guardarEscuela(escuela);
 		assertTrue(optEsc.isPresent());
 		//Recupero la escuela

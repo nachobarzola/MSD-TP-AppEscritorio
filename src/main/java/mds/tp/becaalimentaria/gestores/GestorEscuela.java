@@ -17,6 +17,7 @@ public class GestorEscuela implements GestorEscuelaInterface {
 	public static GestorEscuela getInstance() {
 		if (_INSTANCE == null) {
 			_INSTANCE = new GestorEscuela();
+			_INSTANCE.crearUnaEscuela(); //TODO: borrar desp
 		}
 		return _INSTANCE;
 	}
@@ -24,7 +25,7 @@ public class GestorEscuela implements GestorEscuelaInterface {
 	private GestorEscuela() {
 	}
 	
-	
+	private EscuelaDaoImp repoEscuela = EscuelaDaoImp.getInstance();
 	
 
 	@Override
@@ -35,7 +36,6 @@ public class GestorEscuela implements GestorEscuelaInterface {
 
 	@Override
 	public Optional<Escuela> loginEscuela(String codidoUnicoEstablecimiento, String clave) {
-		/*
 		Escuela escuela = repoEscuela.findByCodigoUnicoEstablecimiento(codidoUnicoEstablecimiento);
 		// Existe esa escuela
 		if (escuela != null) {
@@ -44,8 +44,16 @@ public class GestorEscuela implements GestorEscuelaInterface {
 			}
 
 		}
-		return Optional.empty();*/
-		return null;
+		return Optional.empty();
+	}
+	
+	private void crearUnaEscuela() {
+		
+        Escuela escuela = new Escuela();
+        escuela.setCodigoUnicoEstablecimiento("123");
+        escuela.setClave("123");
+        escuela.setNombre("Pablo A Pizzurno");
+        this.guardarEscuela(escuela);
 	}
 	
 	

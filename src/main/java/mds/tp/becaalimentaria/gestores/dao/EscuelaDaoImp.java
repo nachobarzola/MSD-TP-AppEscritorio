@@ -2,12 +2,14 @@ package mds.tp.becaalimentaria.gestores.dao;
 
 
 import java.util.Optional;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Escuela;
@@ -68,5 +70,28 @@ private static EscuelaDaoImp _INSTANCE;
 		}
 		return Optional.of(escuela);
 	}
+	
+	@Override
+	public Escuela findByCodigoUnicoEstablecimiento(String codigoUnicoEstablecimiento){
+		EntityManager em = emf.createEntityManager();
+		String query = "SELECT e FROM Escuela e WHERE e.codigoUnicoEstablecimiento = :codUnico";
+		TypedQuery<Escuela> escTq = em.createQuery(query,Escuela.class);
+		escTq.setParameter("codUnico", codigoUnicoEstablecimiento);
+		Escuela esc = null;
+		try {
+			esc = escTq.getSingleResult();
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+		} finally {
+			em.close();
+		}
+
+		return esc;
+	}
+	
+	
+	
+	
+	
 
 }

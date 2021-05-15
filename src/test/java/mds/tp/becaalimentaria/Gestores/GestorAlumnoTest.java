@@ -83,7 +83,7 @@ public class GestorAlumnoTest {
 		Direccion direccion = new Direccion("Ramirez 896", "Lucas Gonzalez", "3158");
 		alumnoService.guardarDireccion(direccion);
 		// Creo escuela
-		Escuela escuela = new Escuela("JFHSKVMSE", "siempreViva");
+		Escuela escuela = new Escuela("JFHSKVMSE", "siempreViva","Juan A");
 		escuelaService.guardarEscuela(escuela);
 		// ----Creamos alumno
 		Alumno alumno1 = new Alumno("Ariel", "Chor", "Chile", "395783489", "Ariel@gmail.com", "+543536458203",
@@ -128,7 +128,7 @@ public class GestorAlumnoTest {
 		Optional<Alumno> optAlumno = alumnoService.guardarAlumno(alumno1);
 		// Creo escuela
 
-		Escuela escuela = new Escuela("JFHSKVMSE", "siempreViva");
+		Escuela escuela = new Escuela("JFHSKVMSE", "siempreViva","Juan A");
 		escuelaService.guardarEscuela(escuela);
 
 		Optional<Alumno> optAlumnoActualizado = alumnoService.agregarEscuelaAlumno(escuela, optAlumno.get().getId());
