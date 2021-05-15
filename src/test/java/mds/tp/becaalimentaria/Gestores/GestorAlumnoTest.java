@@ -158,9 +158,9 @@ public class GestorAlumnoTest {
 				true, grupoFamiliar);
 		grupoFamiliar.addProgenitorTutor(progenitor);
 		// Hermanos
-		Hermano h1 = new Hermano(25, "Pule picaportes", "", true, grupoFamiliar);
-		Hermano h2 = new Hermano(20, "Pule picaportes", "", true, grupoFamiliar);
-		Hermano h3 = new Hermano(14, "", "Escuela sin nombre", true, grupoFamiliar);
+		Hermano h1 = new Hermano(25, "Pule picaportes", "", true, grupoFamiliar,"juan","sanche");
+		Hermano h2 = new Hermano(20, "Pule picaportes", "", true, grupoFamiliar, "juan","reyes");
+		Hermano h3 = new Hermano(14, "", "Escuela sin nombre", true, grupoFamiliar, "juan","riquelme");
 		grupoFamiliar.addHermano(h1);
 		grupoFamiliar.addHermano(h2);
 		grupoFamiliar.addHermano(h3);

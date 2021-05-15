@@ -36,6 +36,8 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	private ProgenitorTutorDaoImp progenitorTutorRepo = ProgenitorTutorDaoImp.getInstance();
 
 	private GrupoFamiliarDaoImp grupoFamiliarRepo = GrupoFamiliarDaoImp.getInstance();
+	
+	private HermanoDaoImp hermanoRepo = HermanoDaoImp.getInstance();
 
 	
 	// ---------------------------------------------------
@@ -172,17 +174,13 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	}
 
 	@Override
-	public Optional<GrupoFamiliar> asignarHermanoGrupoFamiliar(GrupoFamiliar grupoFamiliar) {
-		if (grupoFamiliar.getListaHermano().size() == 0) {
+	public Optional<GrupoFamiliar> asignarHermanoGrupoFamiliar(GrupoFamiliar grupoFamiliar, Hermano hermano) {
+		grupoFamiliar.addHermano(hermano);
+		hermano.setGrupoFamiliar(grupoFamiliar);
+		if(hermanoRepo.save(hermano)==null) {
 			return Optional.empty();
 		}
-		// tiene hermanos, Los que guardan la relacion es la clase hermano.
-		// Debo guardar relacion por cada hermano
-		for (Hermano unHer : grupoFamiliar.getListaHermano()) {
-			if (HermanoDaoImp.getInstance().save(unHer) == null) {
-				return Optional.empty();
-			}
-		}
+		
 		return Optional.of(grupoFamiliar);
 	}
 

@@ -19,6 +19,8 @@ public class Hermano {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //valor autonumerico
 	@Column(name="ID_HERMANO")
 	private Integer id;
+	private String nombre;
+	private String apellido;
 	private Integer edad;
 	private String ocupacion; 
 	private String escuela;
@@ -29,13 +31,16 @@ public class Hermano {
 	@JoinColumn(name= "ID_GRUPOFAMILIAR")
 	private GrupoFamiliar grupoFamiliar;
 	
-	public Hermano(Integer edad, String ocupacion, String escuela, Boolean convive,GrupoFamiliar grFamiliar) {
+	public Hermano(Integer edad, String ocupacion, String escuela, Boolean convive,GrupoFamiliar grFamiliar, 
+			String nombre, String apellido) {
 		super();
 		this.edad = edad;
 		this.ocupacion = ocupacion;
 		this.escuela = escuela;
 		this.convive = convive;
 		this.grupoFamiliar = grFamiliar;
+		this.nombre = nombre;
+		this.apellido = apellido;
 	}
 
 	public Hermano() {
@@ -96,6 +101,23 @@ public class Hermano {
 		return "Hermano [id=" + id + ", edad=" + edad + ", ocupacion=" + ocupacion + ", escuela=" + escuela
 				+ ", convive=" + convive + "]";
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	
 	
 	
 }

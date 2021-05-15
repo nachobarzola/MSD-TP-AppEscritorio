@@ -24,7 +24,7 @@ public interface GestorAlumnoInterface {
 	
 	public Optional<GrupoFamiliar> guardarGrupoFamiliar(GrupoFamiliar grupoFamiliar);
 	
-	public Optional<GrupoFamiliar> asignarHermanoGrupoFamiliar(GrupoFamiliar grupoFamiliar);
+	public Optional<GrupoFamiliar> asignarHermanoGrupoFamiliar(GrupoFamiliar grupoFamiliar, Hermano hermano);
 		
 	public Optional<GrupoFamiliar> asignarEnfermedadCronicaGrupoFamiliar(GrupoFamiliar grupoFamiliar, EnfermedadCronica enfermedadCronica);
 	

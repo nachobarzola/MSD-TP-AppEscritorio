@@ -5,6 +5,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import mds.tp.becaalimentaria.domain.GrupoFamiliar;
+import mds.tp.becaalimentaria.domain.Hermano;
 import mds.tp.becaalimentaria.domain.ProgenitorTutor;
 import mds.tp.becaalimentaria.gestores.GestorAlumno;
 
@@ -21,9 +22,11 @@ import java.util.Optional;
 
 public class AltaGrupoFamiliarJPanel extends JPanel {
 	private JTable tableProgenitorTutor;
+	private JTable tableHermano;
 	private MenuJFrame menuJFrame;
 	private AltaGrupoFamiliarJPanel altaGrupoFamiliarJPanel;
-
+	private GrupoFamiliar grupoFamiliarNuevo;
+	private JButton btnAgregarHermano;
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 
 	/**
@@ -41,7 +44,16 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		tableProgenitorTutor.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Nombre", "Apellido",
 				"Ingreso neto", "Edad", "Ocupacion", "Lugar de trabajo", "Convive" }));
 		scrollPane.setViewportView(tableProgenitorTutor);
+		
+		JScrollPane scrollPaneHermanos = new JScrollPane();
+		scrollPaneHermanos.setBounds(22, 353, 500, 104);
+		add(scrollPaneHermanos);
+		tableHermano = new JTable();
+		tableHermano.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Nombre", "Apellido",
+				"Edad", "Ocupacion", "Escuela", "Convive" }));
+		scrollPaneHermanos.setViewportView(tableHermano);
 
+		
 		JLabel lblNewLabel = new JLabel("Progenitor/Tutor:");
 		lblNewLabel.setBounds(22, 118, 96, 14);
 		add(lblNewLabel);
@@ -49,7 +61,29 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		JButton btnAgregarProgenitorTutor = new JButton("Agregar");
 		btnAgregarProgenitorTutor.setBounds(433, 109, 89, 23);
 		add(btnAgregarProgenitorTutor);
+		
+		JLabel lblNewLabel_1 = new JLabel("Hermanos:");
+		lblNewLabel_1.setBounds(22, 328, 79, 14);
+		add(lblNewLabel_1);
+		
+		btnAgregarHermano = new JButton("Agregar");
+		btnAgregarHermano.setBounds(433, 319, 89, 23);
+		btnAgregarHermano.setEnabled(false);
+		add(btnAgregarHermano);
+		
+		
+		btnAgregarHermano.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AltaHermanoJFrame altaHermanoJFrame = new AltaHermanoJFrame(altaGrupoFamiliarJPanel,grupoFamiliarNuevo);
+				altaHermanoJFrame.setVisible(true);
+				
+			}
+			
+		});
+
+		
 		btnAgregarProgenitorTutor.addActionListener(new ActionListener() {
 
 			@Override
@@ -63,6 +97,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 	}
 
 	public void actualizarTablaProgenitor(GrupoFamiliar grupoFamiliar) {
+		this.grupoFamiliarNuevo = grupoFamiliar;
 		Optional<GrupoFamiliar> grupoFamiliarReturn = alumnoService.getGrupoFamiliar(grupoFamiliar.getId());
 		List<ProgenitorTutor> listaProgenitorTutor = grupoFamiliarReturn.get().getListaProgenitorTutor();
 		
@@ -72,8 +107,23 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 						unPro.getEdad(), unPro.getOcupacion(), unPro.getLugarDeTrabajo(), unPro.getConvive()};
 				((DefaultTableModel) tableProgenitorTutor.getModel()).addRow(row);
 			}
+			btnAgregarHermano.setEnabled(true);
 		}
 		tableProgenitorTutor.repaint();
 	}
-
+	
+	public void actualizarTablaHermano(GrupoFamiliar grupoFamiliar) {
+		this.grupoFamiliarNuevo = grupoFamiliar;
+		Optional<GrupoFamiliar> grupoFamiliarReturn = alumnoService.getGrupoFamiliar(grupoFamiliar.getId());
+		List<Hermano> listaHermanos = grupoFamiliarReturn.get().getListaHermano();
+		
+		if (listaHermanos.size() > 0) {
+			for (Hermano unHer : listaHermanos) {
+				Object row[] = { unHer.getNombre(), unHer.getApellido(), unHer.getEdad(),
+						unHer.getOcupacion(), unHer.getEscuela(), unHer.getConvive()};
+				((DefaultTableModel) tableHermano.getModel()).addRow(row);
+			}
+		}
+		tableHermano.repaint();
+	}
 }
