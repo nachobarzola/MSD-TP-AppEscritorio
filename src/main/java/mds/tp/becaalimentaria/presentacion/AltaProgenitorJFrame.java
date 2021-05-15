@@ -5,8 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.hibernate.mapping.PropertyGeneration;
+
+import mds.tp.becaalimentaria.domain.ProgenitorTutor;
+import mds.tp.becaalimentaria.gestores.GestorAlumno;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
@@ -21,7 +30,10 @@ public class AltaProgenitorJFrame extends JFrame {
 	private JTextField tfOcupacion;
 	private JTextField tfLugarDeTrabajo;
 	private JTextField tfIngresosNetos;
-
+	private JRadioButton btnRadioConviveSi;
+	private JRadioButton btnRadioConviveNo;
+	
+	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 	
 	public AltaProgenitorJFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,16 +108,34 @@ public class AltaProgenitorJFrame extends JFrame {
 		tfIngresosNetos.setColumns(10);
 		
 		JLabel lblNewLabel_8 = new JLabel("¿Convive?");
-		lblNewLabel_8.setBounds(159, 269, 63, 14);
+		lblNewLabel_8.setBounds(151, 269, 63, 14);
 		contentPane.add(lblNewLabel_8);
 		
-		JRadioButton btnRadioConviveSi = new JRadioButton("Sí");
-		btnRadioConviveSi.setBounds(217, 265, 33, 23);
+		btnRadioConviveSi = new JRadioButton("Sí");
+		btnRadioConviveSi.setBounds(207, 265, 59, 23);
 		contentPane.add(btnRadioConviveSi);
 		
-		JRadioButton btnRadioConviveNo = new JRadioButton("No");
-		btnRadioConviveNo.setBounds(252, 265, 39, 23);
+		btnRadioConviveSi.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnRadioConviveNo.setSelected(false);;
+				
+			}
+		});
+		
+		btnRadioConviveNo = new JRadioButton("No");
+		btnRadioConviveNo.setBounds(268, 265, 50, 23);
 		contentPane.add(btnRadioConviveNo);
+		
+		btnRadioConviveNo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnRadioConviveSi.setSelected(false);
+				
+			}
+		});
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(229, 326, 89, 23);
@@ -114,5 +144,31 @@ public class AltaProgenitorJFrame extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(123, 326, 89, 23);
 		contentPane.add(btnAtras);
+		
+		btnAceptar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ProgenitorTutor progenitorTutor = new ProgenitorTutor();
+				progenitorTutor.setApellido(tfApellidos.getText());
+				progenitorTutor.setNombre(tfNombres.getText());
+				progenitorTutor.setIngresoNeto(Double.valueOf(tfIngresosNetos.getText()));
+				progenitorTutor.setEdad(Integer.valueOf(tfEdad.getText()));
+				progenitorTutor.setOcupacion(tfOcupacion.getText());
+				progenitorTutor.setLugarDeTrabajo(tfLugarDeTrabajo.getText());
+				if(btnRadioConviveSi.isSelected()) {
+					progenitorTutor.setConvive(true);
+				}
+				if(btnRadioConviveNo.isSelected()) {
+					progenitorTutor.setConvive(false);
+				}
+				alumnoService.guardarGrupoFamiliar();
+				
+				
+			}
+		});
+		
+		
+		
 	}
 }

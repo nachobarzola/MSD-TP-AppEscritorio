@@ -50,7 +50,9 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				AltaProgenitorJFrame altaProgenitorJFrame = new AltaProgenitorJFrame();
+				altaProgenitorJFrame.setVisible(true);
+				
 				
 			}
 		});
