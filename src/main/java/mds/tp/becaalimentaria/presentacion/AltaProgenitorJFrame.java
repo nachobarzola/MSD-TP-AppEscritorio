@@ -8,13 +8,17 @@ import javax.swing.border.EmptyBorder;
 
 import org.hibernate.mapping.PropertyGeneration;
 
+import mds.tp.becaalimentaria.domain.GrupoFamiliar;
 import mds.tp.becaalimentaria.domain.ProgenitorTutor;
 import mds.tp.becaalimentaria.gestores.GestorAlumno;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Optional;
 
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -33,9 +37,14 @@ public class AltaProgenitorJFrame extends JFrame {
 	private JRadioButton btnRadioConviveSi;
 	private JRadioButton btnRadioConviveNo;
 	
+	private AltaGrupoFamiliarJPanel panelAnterior;
+	private AltaProgenitorJFrame altaProgenitorJFrame;
+	
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 	
-	public AltaProgenitorJFrame() {
+	public AltaProgenitorJFrame(AltaGrupoFamiliarJPanel panelAnt) {
+		this.altaProgenitorJFrame = this;
+		this.panelAnterior = panelAnt;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 600);
 		contentPane = new JPanel();
@@ -162,8 +171,28 @@ public class AltaProgenitorJFrame extends JFrame {
 				if(btnRadioConviveNo.isSelected()) {
 					progenitorTutor.setConvive(false);
 				}
-				alumnoService.guardarGrupoFamiliar();
+				//Cremos el grupo familiar
+				GrupoFamiliar grupoFamiliar = new GrupoFamiliar();
+				grupoFamiliar.addProgenitorTutor(progenitorTutor);
+				progenitorTutor.setGrupoFamiliar(grupoFamiliar);
 				
+				Optional<GrupoFamiliar> optGrupoFamiliarRetur = alumnoService.guardarGrupoFamiliar(grupoFamiliar);
+				if(optGrupoFamiliarRetur.isPresent()) {
+					// guardado correctamente
+					 String text = "Progeitor guardado correctamente";
+					    String title = "Exito";
+					    int optionType = JOptionPane.DEFAULT_OPTION;
+					    int result = JOptionPane.showConfirmDialog(altaProgenitorJFrame, text, title, optionType);
+					    if (result == JOptionPane.OK_OPTION) {
+					    	panelAnterior.actualizarTablaProgenitor();
+					    	altaProgenitorJFrame.dispose();
+					    }
+				}
+				else {
+					// error
+					JOptionPane.showMessageDialog(altaProgenitorJFrame, "No se pudo guardar el progenitor", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 				
 			}
 		});

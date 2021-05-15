@@ -3,6 +3,9 @@ package mds.tp.becaalimentaria.presentacion;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import mds.tp.becaalimentaria.gestores.GestorAlumno;
+
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 
@@ -14,14 +17,17 @@ import javax.swing.JButton;
 public class AltaGrupoFamiliarJPanel extends JPanel {
 	private JTable tableProgenitorTutor;
 	private MenuJFrame menuJFrame;
+	private AltaGrupoFamiliarJPanel altaGrupoFamiliarJPanel;
 
-
+	private GestorAlumno alumnoService = GestorAlumno.getInstance();
+	
 	/**
 	 * Create the panel.
 	 */
 	public AltaGrupoFamiliarJPanel(MenuJFrame frame) {
 		setLayout(null);
 		this.menuJFrame = frame;
+		this.altaGrupoFamiliarJPanel=this;
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(22, 143, 500, 104);
@@ -50,7 +56,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AltaProgenitorJFrame altaProgenitorJFrame = new AltaProgenitorJFrame();
+				AltaProgenitorJFrame altaProgenitorJFrame = new AltaProgenitorJFrame(altaGrupoFamiliarJPanel);
 				altaProgenitorJFrame.setVisible(true);
 				
 				
@@ -58,4 +64,11 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		});
 
 	}
+	public void actualizarTablaProgenitor() {
+		//alumnoService.getGrupoFamiliar()
+		
+		tableProgenitorTutor.repaint();
+	}
+	
+	
 }

@@ -4,8 +4,10 @@ import java.util.Optional;
 
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Direccion;
+import mds.tp.becaalimentaria.domain.EnfermedadCronica;
 import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.domain.GrupoFamiliar;
+import mds.tp.becaalimentaria.domain.Hermano;
 
 
 public interface GestorAlumnoInterface {
@@ -21,7 +23,11 @@ public interface GestorAlumnoInterface {
 	public Optional<Direccion> guardarDireccion(Direccion direccion);
 	
 	public Optional<GrupoFamiliar> guardarGrupoFamiliar(GrupoFamiliar grupoFamiliar);
+	
+	public Optional<GrupoFamiliar> asignarHermanoGrupoFamiliar(GrupoFamiliar grupoFamiliar);
 		
+	public Optional<GrupoFamiliar> asignarEnfermedadCronicaGrupoFamiliar(GrupoFamiliar grupoFamiliar, EnfermedadCronica enfermedadCronica);
+	
 	public Optional<Alumno> agregarEscuelaAlumno(Escuela escuela, Integer idAlumno);
 	
 	public Optional<Alumno> agregarGrupoFamiliarAAlumno(GrupoFamiliar grupFamiliar, Integer idAlumno);
