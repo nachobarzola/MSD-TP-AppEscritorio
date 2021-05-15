@@ -35,6 +35,9 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	
 	private ProgenitorTutorDaoImp progenitorTutorRepo = ProgenitorTutorDaoImp.getInstance();
 
+	private GrupoFamiliarDaoImp grupoFamiliarRepo = GrupoFamiliarDaoImp.getInstance();
+
+	
 	// ---------------------------------------------------
 
 	@Override
@@ -201,8 +204,9 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	}
 
 	@Override
-	public List<ProgenitorTutor> getProgenitorTutorGrupoFamiliar(GrupoFamiliar grupoFamiliar) {
-		return progenitorTutorRepo.findByProgenitorTutor(grupoFamiliar.getId());
+	public Optional<GrupoFamiliar> getGrupoFamiliar(Integer idGrupoFamiliar) {
+		return grupoFamiliarRepo.findById(idGrupoFamiliar);
 	}
+
 
 }

@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AltaGrupoFamiliarJPanel extends JPanel {
 	private JTable tableProgenitorTutor;
@@ -62,7 +63,9 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 	}
 
 	public void actualizarTablaProgenitor(GrupoFamiliar grupoFamiliar) {
-		List<ProgenitorTutor> listaProgenitorTutor = alumnoService.getProgenitorTutorGrupoFamiliar(grupoFamiliar);
+		Optional<GrupoFamiliar> grupoFamiliarReturn = alumnoService.getGrupoFamiliar(grupoFamiliar.getId());
+		List<ProgenitorTutor> listaProgenitorTutor = grupoFamiliarReturn.get().getListaProgenitorTutor();
+		
 		if (listaProgenitorTutor.size() > 0) {
 			for (ProgenitorTutor unPro : listaProgenitorTutor) {
 				Object row[] = { unPro.getNombre(), unPro.getApellido(), unPro.getIngresoNeto(),

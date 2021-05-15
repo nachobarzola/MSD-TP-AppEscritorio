@@ -7,5 +7,4 @@ public interface ProgenitorTutorDAo {
 
 	public ProgenitorTutor save(ProgenitorTutor progenitorTutor);
 	
-	public List<ProgenitorTutor> findByProgenitorTutor(Integer idGrupoFamiliar);
 }

@@ -40,5 +40,6 @@ public interface GestorAlumnoInterface {
 	
 	public Integer getCantidadHermanos(Alumno alumno);
 	
-	public List<ProgenitorTutor> getProgenitorTutorGrupoFamiliar(GrupoFamiliar grupoFamiliar);
+	public Optional<GrupoFamiliar> getGrupoFamiliar(Integer idGrupoFamiliar);
+	
 }

@@ -56,26 +56,6 @@ public class ProgenitorTutorDaoImp implements ProgenitorTutorDAo{
 		}
 	}
 
-	@Override
-	public List<ProgenitorTutor> findByProgenitorTutor(Integer idGrupoFamiliar) {
-		EntityManager em = emf.createEntityManager();
-		//String query = "SELECT p FROM ProgenitorTutor p WHERE p.ID_GRUPOFAMILIAR = :idgrupofamiliar";
-		String query = "SELECT p FROM ProgenitorTutor p INNER JOIN GrupoFamiliar g ON p.id_grupofamiliar=g.id_grupofamiliar"
-				+ " WHERE p.id_grupofamiliar=:idGrupoFamiliar";
-		TypedQuery<ProgenitorTutor> tq = em.createQuery(query, ProgenitorTutor.class);
-		
-		tq.setParameter("idgrupofamiliar", idGrupoFamiliar);
-		
-		List<ProgenitorTutor> listaProgenitorTutor = null;
-		try {
-			listaProgenitorTutor = tq.getResultList();
-		} catch (NoResultException ex) {
-			ex.printStackTrace();
-		} finally {
-			em.close();
-		}
-		System.out.println("La lista es "+listaProgenitorTutor.get(0).toString());
-		return listaProgenitorTutor;
-	}
+
 
 }

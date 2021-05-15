@@ -10,4 +10,5 @@ public interface GrupoFamiliarDao {
 	public GrupoFamiliar save(GrupoFamiliar grupoFamiliar);
 
 	public Optional<GrupoFamiliar> findById(Integer id);
+	
 }
