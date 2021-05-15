@@ -22,6 +22,7 @@ public class MenuJFrame extends JFrame {
 	private AltaAlumnoJPanel panelAltaAlumno;
 	private MenuJPanel panelMenu;
 	private MenuAlumnoJPanel panelMenuAlumno;
+	private AltaGrupoFamiliarJPanel panelAltaGrupoFamiliar;
 	
 	private CardLayout cardLayout= new CardLayout();
 	private MenuJFrame menuJFrame;
@@ -51,7 +52,7 @@ public class MenuJFrame extends JFrame {
 	}
 	
 	
-	public void cambiarVentanaMenu(int n, Escuela escuelaLog) {
+	public void cambiarVentanaMenu(int n) {
 		switch(n) {
 		case 1:
 			this.setTitle("Menu");
@@ -70,6 +71,12 @@ public class MenuJFrame extends JFrame {
 			panelAltaAlumno = new AltaAlumnoJPanel(this);
 			contentPane.add(panelAltaAlumno,"3");
 			cardLayout.show(contentPane, "3");
+			break;
+		case 4: //Alta grupo familiar
+			this.setTitle("Agregar grupo familiar");
+			panelAltaGrupoFamiliar = new AltaGrupoFamiliarJPanel(this);
+			contentPane.add(panelAltaGrupoFamiliar,"4");
+			cardLayout.show(contentPane, "4");
 			break;
 		
 		

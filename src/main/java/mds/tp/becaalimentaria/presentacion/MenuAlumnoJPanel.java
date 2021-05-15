@@ -30,7 +30,7 @@ public class MenuAlumnoJPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarVentanaMenu(3, menuJFrame.getEscuelaLogeada());
+				menuJFrame.cambiarVentanaMenu(3);
 			}
 		});
 

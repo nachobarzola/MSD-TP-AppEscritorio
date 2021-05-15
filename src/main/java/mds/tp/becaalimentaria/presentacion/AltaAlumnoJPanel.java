@@ -38,12 +38,12 @@ public class AltaAlumnoJPanel extends JPanel {
 	private JTextField tfEmail;
 	private JTextField tfTelefono;
 	private JComboBox comboTurno;
-	
+
 	private MenuJFrame menuJFrame;
 
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 
-	public AltaAlumnoJPanel( MenuJFrame frame) {
+	public AltaAlumnoJPanel(MenuJFrame frame) {
 		this.menuJFrame = frame;
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 300, 677, 602);
@@ -191,6 +191,9 @@ public class AltaAlumnoJPanel extends JPanel {
 		tfTelefono.setBounds(353, 100, 86, 20);
 		add(tfTelefono);
 
+		// TODO: metodo temporal, borrar luego
+		cargarDatosInterfaceGrafica();
+
 		btnAgregarAlumno.addActionListener(new ActionListener() {
 
 			@Override
@@ -218,14 +221,20 @@ public class AltaAlumnoJPanel extends JPanel {
 				alumno.setDireccion(direccion);
 				alumno.setEmail(tfEmail.getText());
 				alumno.setTelefono(tfTelefono.getText());
-				
+
 				alumno.setEscuela(menuJFrame.getEscuelaLogeada());
 
 				Optional<Alumno> optAlumnoReturn = alumnoService.guardarAlumno(alumno);
 				if (optAlumnoReturn.isPresent()) {
 					// guardado correctamente
-					JOptionPane.showMessageDialog(menuJFrame, "Alumno guardado correctamente", "Exito",
-							JOptionPane.INFORMATION_MESSAGE);
+					 String text = "Alumno guardado correctamente";
+					    String title = "Exito";
+					    int optionType = JOptionPane.DEFAULT_OPTION;
+					    int result = JOptionPane.showConfirmDialog(menuJFrame, text, title, optionType);
+					    if (result == JOptionPane.OK_OPTION) {
+					       menuJFrame.cambiarVentanaMenu(4);
+					    }
+					
 				} else {
 					// error
 					JOptionPane.showMessageDialog(menuJFrame, "No se pudo guardar el alumno", "Error",
@@ -237,4 +246,19 @@ public class AltaAlumnoJPanel extends JPanel {
 		});
 
 	}
+
+	private void cargarDatosInterfaceGrafica() {
+		tfApellido.setText("Juhano");
+		tfNombre.setText("Pepe");
+		tfNacionalidad.setText("Uruguay");
+		tfDNI.setText("39578398");
+		tfCUIT.setText("20395783980");
+		tfGrado.setText("5to");
+		tfDomicilio.setText("Santa Fe 555");
+		tfCodigoPostal.setText("3029");
+		tfLocalidad.setText("Santa Fe Capital");
+		tfEmail.setText("Juahano@gmail.com");
+		tfTelefono.setText("+5433684569896");
+	}
+
 }
