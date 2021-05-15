@@ -35,8 +35,9 @@ public class GestorEscuela implements GestorEscuelaInterface {
 
 	@Override
 	public Optional<Escuela> loginEscuela(String codidoUnicoEstablecimiento, String clave) {
-		/*
-		Escuela escuela = repoEscuela.findByCodigoUnicoEstablecimiento(codidoUnicoEstablecimiento);
+		EscuelaDaoImp escuelaRepo = EscuelaDaoImp.getInstance();
+		
+		Escuela escuela = escuelaRepo.findByCodigoUnicoEstablecimiento(codidoUnicoEstablecimiento);
 		// Existe esa escuela
 		if (escuela != null) {
 			if (escuela.getClave().equals(clave)) {
@@ -44,8 +45,7 @@ public class GestorEscuela implements GestorEscuelaInterface {
 			}
 
 		}
-		return Optional.empty();*/
-		return null;
+		return Optional.empty();
 	}
 	
 	

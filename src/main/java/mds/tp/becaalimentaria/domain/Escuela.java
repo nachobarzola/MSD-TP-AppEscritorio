@@ -20,8 +20,12 @@ public class Escuela {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //valor autonumerico
 	@Column(name="ID_ESCUELA")
 	private Integer id;
+	@Column(name="codigounicoestablecimiento")
 	private String codigoUnicoEstablecimiento;
+	@Column(name="clave")
 	private String clave;
+	@Column(name="nombre")
+	private String nombre;
 	
 	@OneToMany(mappedBy = "escuela")
 	private List<Alumno> listaAlumnos;
@@ -72,6 +76,15 @@ public class Escuela {
 	public String toString() {
 		return "Escuela [id=" + id + ", codigoUnicoEstablecimiento=" + codigoUnicoEstablecimiento + ", clave=" + clave
 				+ ", listaAlumnos=" + listaAlumnos + "]";
+	}
+	public void setNombre(String string) {
+		this.nombre = string;
+		
+	}
+
+	public String getNombre() {
+		return nombre;
+		
 	}
 	
 	
