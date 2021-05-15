@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints = 
+@Table(name= "GRUPOFAMILIAR",uniqueConstraints = 
 {@UniqueConstraint(columnNames={"ID_GRUPOFAMILIAR"})})
 public class GrupoFamiliar {
 	@Id

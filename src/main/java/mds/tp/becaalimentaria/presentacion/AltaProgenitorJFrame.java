@@ -184,8 +184,9 @@ public class AltaProgenitorJFrame extends JFrame {
 					    int optionType = JOptionPane.DEFAULT_OPTION;
 					    int result = JOptionPane.showConfirmDialog(altaProgenitorJFrame, text, title, optionType);
 					    if (result == JOptionPane.OK_OPTION) {
-					    	panelAnterior.actualizarTablaProgenitor();
 					    	altaProgenitorJFrame.dispose();
+					    	panelAnterior.actualizarTablaProgenitor(grupoFamiliar);
+					    	
 					    }
 				}
 				else {

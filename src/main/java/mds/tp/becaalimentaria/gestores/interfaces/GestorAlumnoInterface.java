@@ -1,6 +1,7 @@
 package mds.tp.becaalimentaria.gestores.interfaces;
 
 import java.util.Optional;
+import java.util.List;
 
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Direccion;
@@ -8,6 +9,7 @@ import mds.tp.becaalimentaria.domain.EnfermedadCronica;
 import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.domain.GrupoFamiliar;
 import mds.tp.becaalimentaria.domain.Hermano;
+import mds.tp.becaalimentaria.domain.ProgenitorTutor;
 
 
 public interface GestorAlumnoInterface {
@@ -17,8 +19,6 @@ public interface GestorAlumnoInterface {
 	public Optional<Alumno> borrarAlumno(Alumno alumno);
 	
 	public Optional<Alumno> actualizarAlumno(Alumno alumno);
-	
-	public Optional<Alumno> getAlumno(Integer id);
 	
 	public Optional<Direccion> guardarDireccion(Direccion direccion);
 	
@@ -32,9 +32,13 @@ public interface GestorAlumnoInterface {
 	
 	public Optional<Alumno> agregarGrupoFamiliarAAlumno(GrupoFamiliar grupFamiliar, Integer idAlumno);
 	
+	public Optional<Alumno> getAlumno(Integer id);
+	
 	public Double getIngresoFamiliarTotal(Alumno alumno);
 	
 	public Double getGastoEnfermedadCronica(Alumno alumno);
 	
 	public Integer getCantidadHermanos(Alumno alumno);
+	
+	public List<ProgenitorTutor> getProgenitorTutorGrupoFamiliar(GrupoFamiliar grupoFamiliar);
 }
