@@ -21,43 +21,57 @@ public class MenuJFrame extends JFrame {
 	private JPanel contentPane;
 	private AltaAlumnoJPanel panelAltaAlumno;
 	private MenuJPanel panelMenu;
+	private MenuAlumnoJPanel panelMenuAlumno;
 	
 	private CardLayout cardLayout= new CardLayout();
-	private MenuJFrame frame;
+	private MenuJFrame menuJFrame;
+	
+	private Escuela escuelaLogeada;
 	
 
 	
 	
 	public MenuJFrame(Escuela escuela) {
-		this.frame = this;
+		this.escuelaLogeada = escuela;
+		this.menuJFrame = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 738, 583);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(cardLayout);
 		
-		MenuJPanel menuJPanel= new MenuJPanel(frame, escuela);
+		MenuJPanel menuJPanel= new MenuJPanel(menuJFrame);
 		contentPane.add(menuJPanel, "1");
 		
 		
 	}
+	public Escuela getEscuelaLogeada() {
+		return this.escuelaLogeada;
+	}
 	
 	
-	public void cambiarVentanaMenu(int n, Escuela escuela) {
+	public void cambiarVentanaMenu(int n, Escuela escuelaLog) {
 		switch(n) {
 		case 1:
 			this.setTitle("Menu");
-			panelMenu = new MenuJPanel(this,escuela);
+			panelMenu = new MenuJPanel(this);
 			contentPane.add(panelMenu,"1");
 			cardLayout.show(contentPane, "1");
 			break;
-		case 2: //Alta Alumno
-			this.setTitle("Agregar alumno");
-			panelAltaAlumno = new AltaAlumnoJPanel(this);
-			contentPane.add(panelAltaAlumno,"2");
+		case 2: //Menu alumno
+			this.setTitle("Menu alumno");
+			panelMenuAlumno = new MenuAlumnoJPanel(this);
+			contentPane.add(panelMenuAlumno,"2");
 			cardLayout.show(contentPane, "2");
 			break;
+		case 3: //Alta Alumno
+			this.setTitle("Agregar alumno");
+			panelAltaAlumno = new AltaAlumnoJPanel(this);
+			contentPane.add(panelAltaAlumno,"3");
+			cardLayout.show(contentPane, "3");
+			break;
+		
 		
 		}
 	}

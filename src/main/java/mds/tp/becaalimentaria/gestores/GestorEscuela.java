@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.gestores.dao.EscuelaDaoImp;
 import mds.tp.becaalimentaria.gestores.interfaces.GestorEscuelaInterface;
@@ -17,7 +18,7 @@ public class GestorEscuela implements GestorEscuelaInterface {
 	public static GestorEscuela getInstance() {
 		if (_INSTANCE == null) {
 			_INSTANCE = new GestorEscuela();
-			_INSTANCE.crearUnaEscuela(); //TODO: borrar desp
+			//_INSTANCE.crearUnaEscuela(); //TODO: borrar desp
 		}
 		return _INSTANCE;
 	}
@@ -32,6 +33,14 @@ public class GestorEscuela implements GestorEscuelaInterface {
 	public Optional<Escuela> guardarEscuela(Escuela escuela) {
 		return Optional.of(EscuelaDaoImp.getInstance().save(escuela));
 	
+	}
+	@Override
+	public Optional<Escuela> asignarAlumnoEscuela(Escuela escuela, Alumno alumno){
+		escuela.addAlumno(alumno);
+		if(this.repoEscuela.save(escuela) == null) {
+			return Optional.empty();
+		}
+		return Optional.of(escuela);
 	}
 
 	@Override

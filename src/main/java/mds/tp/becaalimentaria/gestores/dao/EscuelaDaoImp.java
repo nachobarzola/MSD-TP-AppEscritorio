@@ -36,9 +36,14 @@ private static EscuelaDaoImp _INSTANCE;
 		try {
 			et = em.getTransaction();
 			et.begin();
-						
-			em.persist(escuela);
-			em.flush(); //Actualiza el alumno en memoria
+			
+			if(escuela.getId() == null) {
+				em.persist(escuela);
+				em.flush(); //Actualiza el escuela en memoria
+			}
+			else {
+				em.merge(escuela);
+			}
 			et.commit();
 			return escuela;
 			

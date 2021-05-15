@@ -1,8 +1,5 @@
 package mds.tp.becaalimentaria.presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -41,14 +38,15 @@ public class AltaAlumnoJPanel extends JPanel {
 	private JTextField tfEmail;
 	private JTextField tfTelefono;
 	private JComboBox comboTurno;
-	private JFrame framePrincipal;
+	
+	private MenuJFrame menuJFrame;
 
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 
-	public AltaAlumnoJPanel( JFrame frame) {
-		this.framePrincipal = frame;
+	public AltaAlumnoJPanel( MenuJFrame frame) {
+		this.menuJFrame = frame;
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 300, 519, 506);
+		setBounds(100, 300, 677, 602);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		// setContentPane(contentPane);
 		this.setLayout(null);
@@ -220,15 +218,17 @@ public class AltaAlumnoJPanel extends JPanel {
 				alumno.setDireccion(direccion);
 				alumno.setEmail(tfEmail.getText());
 				alumno.setTelefono(tfTelefono.getText());
+				
+				alumno.setEscuela(menuJFrame.getEscuelaLogeada());
 
 				Optional<Alumno> optAlumnoReturn = alumnoService.guardarAlumno(alumno);
 				if (optAlumnoReturn.isPresent()) {
 					// guardado correctamente
-					JOptionPane.showMessageDialog(framePrincipal, "Alumno guardado correctamente", "Exito",
-							JOptionPane.OK_OPTION);
+					JOptionPane.showMessageDialog(menuJFrame, "Alumno guardado correctamente", "Exito",
+							JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					// error
-					JOptionPane.showMessageDialog(framePrincipal, "No se pudo guardar el alumno", "Error",
+					JOptionPane.showMessageDialog(menuJFrame, "No se pudo guardar el alumno", "Error",
 							JOptionPane.ERROR_MESSAGE);
 
 				}

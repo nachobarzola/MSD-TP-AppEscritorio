@@ -32,11 +32,33 @@ public class GestorAlumno implements GestorAlumnoInterface{
 	
 	private GestorAlumno() {}
 	
+	private GestorEscuela escuelaService = GestorEscuela.getInstance();
+	
 	
 	//---------------------------------------------------
 	
 	@Override
 	public Optional<Alumno> guardarAlumno(Alumno alumno) {
+		//Chequeo si tiene asociado una direccion
+		if(alumno.getDireccion() != null) {
+			Optional<Direccion> optDireccionReturn= this.guardarDireccion(alumno.getDireccion());
+			if(optDireccionReturn.isEmpty()) {
+				return Optional.empty();
+			}
+			alumno.setDireccion(optDireccionReturn.get());
+		}
+		//Chequeo si tiene asociado una escuela
+		if(alumno.getEscuela() != null) {
+			Optional<Escuela> optEscuelaReturn = escuelaService.guardarEscuela(alumno.getEscuela());
+			if(optEscuelaReturn.isEmpty()) {
+				return Optional.empty();
+			}
+			//Asigno el alumno a la escuela y actualizo en la BD la escuela
+			if(escuelaService.asignarAlumnoEscuela(optEscuelaReturn.get(), alumno) == null) {
+				return Optional.empty();
+			}
+			alumno.setEscuela(optEscuelaReturn.get());
+		}
 		Alumno alumnoRetur = AlumnoDaoImp.getInstance().save(alumno);
 		return Optional.of(alumnoRetur);
 	}

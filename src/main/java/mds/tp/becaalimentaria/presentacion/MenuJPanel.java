@@ -17,9 +17,8 @@ public class MenuJPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MenuJPanel(MenuJFrame frame,Escuela escuela) {
+	public MenuJPanel(MenuJFrame frame) {
 		this.menuJFrame = frame;
-		this.escuelaLogeada = escuela;
 		
 		JButton btnAlumno = new JButton("Alumno");
         add(btnAlumno, "name_903094095131900");
@@ -30,7 +29,7 @@ public class MenuJPanel extends JPanel {
         JLabel lblNewLabel = new JLabel("MENU");
         add(lblNewLabel, "name_903094126363500");
 
-        JLabel lblEscuela = new JLabel(escuela.getNombre());
+        JLabel lblEscuela = new JLabel(menuJFrame.getEscuelaLogeada().getNombre());
         add(lblEscuela, "name_903094143766800");
 
         //contentPane.setLayout(cardLayout);
@@ -38,8 +37,7 @@ public class MenuJPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				menuJFrame.cambiarVentanaMenu(2, escuelaLogeada);
+				menuJFrame.cambiarVentanaMenu(2, menuJFrame.getEscuelaLogeada());
 			}
 		});
        

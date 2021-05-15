@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(uniqueConstraints = 
-{@UniqueConstraint(columnNames={"ID_ESCUELA"})})
+{@UniqueConstraint(columnNames={"codigoUnicoEstablecimiento"})})
 public class Escuela {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //valor autonumerico
@@ -25,7 +26,7 @@ public class Escuela {
 	private String clave;
 	private String nombre;
 	
-	@OneToMany(mappedBy = "escuela")
+	@OneToMany(mappedBy = "escuela", fetch = FetchType.EAGER)
 	private List<Alumno> listaAlumnos;
 	
 	
