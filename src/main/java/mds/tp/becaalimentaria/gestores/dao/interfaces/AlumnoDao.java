@@ -13,5 +13,6 @@ public interface AlumnoDao {
 	public Optional<Alumno> findById(Integer id);
 	
 	public Optional<Alumno> findByDni(String dni);
+
 	
 }

@@ -30,7 +30,8 @@ public class Login extends JFrame {
 	private JPasswordField campoClave;
 	private JLabel ingresando;
 	private JFrame loginFrame;
-	
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
 	private GestorEscuela escuelaService = GestorEscuela.getInstance();
 
 	
@@ -62,11 +63,11 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Código: ");
+		lblNewLabel = new JLabel("Código: ");
 		lblNewLabel.setBounds(127, 74, 46, 14);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Clave: ");
+		lblNewLabel_1 = new JLabel("Clave: ");
 		lblNewLabel_1.setBounds(127, 109, 46, 14);
 		
 		contentPane.add(lblNewLabel_1);
@@ -93,24 +94,43 @@ public class Login extends JFrame {
 		contentPane.add(ingresando);
 		
 		btnIngresar.addActionListener(new ActionListener(){  
-			public void actionPerformed(ActionEvent e){  
-		        ingresando.setVisible(true);
+			public void actionPerformed(ActionEvent e){
+				boolean completo = true;
+				if(campoCodigo.getText().length() == 0) {
+					completo = false;
+				}
+				if(campoClave.getText().length() == 0){
+					completo = false;
+				}
+				if(completo) {
+					ingresando.setVisible(true);
+			        
+				     
+			        Optional<Escuela> optEscuela = escuelaService.loginEscuela(campoCodigo.getText(),campoClave.getText());
+			        
+			        if (optEscuela.isPresent()) {
+			        	MenuJFrame menu = new MenuJFrame(optEscuela.get());
+			        	menu.setVisible(true);
+			        	
+			        	loginFrame.dispose();
+			        }
+			        else {
+			        	JOptionPane.showMessageDialog(loginFrame,
+			        	    "Ingrese un código y clave correctas",
+			        	    "Error",
+			        	    JOptionPane.ERROR_MESSAGE);
+			        		ingresando.setVisible(false);
+			        }
+					
+				}
+				else {
+					JOptionPane.showMessageDialog(loginFrame,
+			        	    "Debe completar el campo 'Código' y 'Clave'",
+			        	    "Error",
+			        	    JOptionPane.ERROR_MESSAGE);
+					//System.out.println("Debe llenar todos los campos");
+				}
 		        
-		     
-		        Optional<Escuela> optEscuela = escuelaService.loginEscuela(campoCodigo.getText(),campoClave.getText());
-		        
-		        if (optEscuela.isPresent()) {
-		        	MenuJFrame menu = new MenuJFrame(optEscuela.get());
-		        	menu.setVisible(true);
-		        	
-		        	loginFrame.dispose();
-		        }
-		        else {
-		        	JOptionPane.showMessageDialog(loginFrame,
-		        	    "Ingrese una código y clave correctas",
-		        	    "Error",
-		        	    JOptionPane.ERROR_MESSAGE);
-		        }
 		        
 		}  
 		});  

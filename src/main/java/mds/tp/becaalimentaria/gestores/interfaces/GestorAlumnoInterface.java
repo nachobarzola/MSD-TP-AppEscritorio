@@ -43,5 +43,9 @@ public interface GestorAlumnoInterface {
 	public Optional<GrupoFamiliar> getGrupoFamiliar(Integer idGrupoFamiliar);
 	
 	public Optional<Alumno> findByDni(String dni);
+
+	public boolean comprobarExistencia(String dni);
+	
+	//public boolean comprobarExistencia(String dni);
 	
 }

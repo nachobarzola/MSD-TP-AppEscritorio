@@ -209,5 +209,16 @@ public class GestorAlumno implements GestorAlumnoInterface {
 		return alumnoRepo.findByDni(dni);
 	}
 
+	// Comprueba mediante el dni si el alumno existe en la base de datos
+	@Override
+	public boolean comprobarExistencia(String dni) {
+		boolean ret = false;
+		Optional<Alumno> optAlumno = AlumnoDaoImp.getInstance().findByDni(dni);
+		//System.out.println(optAlumno);
+		if(optAlumno.isPresent()) {
+			ret = true;
+		}
+		return ret;
+	}
 
 }

@@ -2,6 +2,7 @@ package mds.tp.becaalimentaria.presentacion;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import mds.tp.becaalimentaria.domain.Alumno;
@@ -12,11 +13,14 @@ import mds.tp.becaalimentaria.gestores.GestorAlumno;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Optional;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -40,6 +44,10 @@ public class AltaAlumnoJPanel extends JPanel {
 	private JComboBox comboTurno;
 
 	private MenuJFrame menuJFrame;
+	
+	//Border compound;
+	Border bordeRojo = BorderFactory.createLineBorder(Color.red);
+
 
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 
@@ -198,51 +206,69 @@ public class AltaAlumnoJPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Alumno alumno = new Alumno();
-				alumno.setApellido(tfApellido.getText());
-				alumno.setNombre(tfNombre.getText());
-				alumno.setNacionalidad(tfNacionalidad.getText());
-				alumno.setDni(tfDNI.getText());
-				alumno.setCuit(tfCUIT.getText());
-				alumno.setGrado(tfGrado.getText());
-				String turnoSelec = comboTurno.getSelectedItem().toString();
-				if (turnoSelec.equals("Mañana")) {
-					alumno.setTurno(Turno.Manana);
-				} else if (turnoSelec.equals("Tarde")) {
-					alumno.setTurno(Turno.Tarde);
-				} else if (turnoSelec.equals("Noche")) {
-					alumno.setTurno(Turno.Noche);
-				}
-				alumno.setFechaDeNacimiento(null);
-				Direccion direccion = new Direccion();
-				direccion.setDomicilio(tfDomicilio.getText());
-				direccion.setCodigoPostal(tfCodigoPostal.getText());
-				direccion.setLocalidad(tfLocalidad.getText());
-				alumno.setDireccion(direccion);
-				alumno.setEmail(tfEmail.getText());
-				alumno.setTelefono(tfTelefono.getText());
-
-				alumno.setEscuela(menuJFrame.getEscuelaLogeada());
-
-				Optional<Alumno> optAlumnoReturn = alumnoService.guardarAlumno(alumno);
-				if (optAlumnoReturn.isPresent()) {
-					// guardado correctamente
-					 String text = "Alumno guardado correctamente";
-					    String title = "Exito";
-					    int optionType = JOptionPane.DEFAULT_OPTION;
-					    int result = JOptionPane.showConfirmDialog(menuJFrame, text, title, optionType);
-					    if (result == JOptionPane.OK_OPTION) {
-					       menuJFrame.cambiarVentanaMenu(4);
-					    }
+				boolean estado = validarCamposVacios();
+				
+				if(estado) { //Si todos los campos estan completos
 					
-				} else {
-					// error
-					JOptionPane.showMessageDialog(menuJFrame, "No se pudo guardar el alumno", "Error",
-							JOptionPane.ERROR_MESSAGE);
+					if(alumnoService.comprobarExistencia(tfDNI.getText()) == false) { //Si no existe el alumno en la BD
+						Alumno alumno = new Alumno();
+						alumno.setApellido(tfApellido.getText());
+						alumno.setNombre(tfNombre.getText());
+						alumno.setNacionalidad(tfNacionalidad.getText());
+						alumno.setDni(tfDNI.getText());
+						alumno.setCuit(tfCUIT.getText());
+						alumno.setGrado(tfGrado.getText());
+						String turnoSelec = comboTurno.getSelectedItem().toString();
+						if (turnoSelec.equals("Mañana")) {
+							alumno.setTurno(Turno.Manana);
+						} else if (turnoSelec.equals("Tarde")) {
+							alumno.setTurno(Turno.Tarde);
+						} else if (turnoSelec.equals("Noche")) {
+							alumno.setTurno(Turno.Noche);
+						}
+						alumno.setFechaDeNacimiento(null);
+						Direccion direccion = new Direccion();
+						direccion.setDomicilio(tfDomicilio.getText());
+						direccion.setCodigoPostal(tfCodigoPostal.getText());
+						direccion.setLocalidad(tfLocalidad.getText());
+						alumno.setDireccion(direccion);
+						alumno.setEmail(tfEmail.getText());
+						alumno.setTelefono(tfTelefono.getText());
 
+						alumno.setEscuela(menuJFrame.getEscuelaLogeada());
+
+						Optional<Alumno> optAlumnoReturn = alumnoService.guardarAlumno(alumno);
+						if (optAlumnoReturn.isPresent()) {
+							// guardado correctamente
+							 String text = "Alumno guardado correctamente";
+							    String title = "Exito";
+							    int optionType = JOptionPane.DEFAULT_OPTION;
+							    int result = JOptionPane.showConfirmDialog(menuJFrame, text, title, optionType);
+							    if (result == JOptionPane.OK_OPTION) {
+							       menuJFrame.cambiarVentanaMenu(4);
+							    }
+							
+						} else {
+							// error
+							JOptionPane.showMessageDialog(menuJFrame, "No se pudo guardar el alumno", "Error",
+									JOptionPane.ERROR_MESSAGE);
+
+						}
+					}
+					else { //Si existe el alumno en la BD
+						JOptionPane.showMessageDialog(menuJFrame, "El alumno con DNI: "+ tfDNI.getText()+" ya existe en el sistema", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+					
 				}
+				else {
+					JOptionPane.showMessageDialog(menuJFrame, "Debe completar todos los campos", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				
 
 			}
+
 		});
 
 	}
@@ -259,6 +285,58 @@ public class AltaAlumnoJPanel extends JPanel {
 		tfLocalidad.setText("Santa Fe Capital");
 		tfEmail.setText("Juahano@gmail.com");
 		tfTelefono.setText("+5433684569896");
+	}
+	
+	private boolean validarCamposVacios() {
+		boolean estado = true;
+		if(tfApellido.getText().length() == 0) {
+			estado = false;
+			tfApellido.setBorder(bordeRojo);
+		}
+		if(tfNombre.getText().length() == 0) {
+			estado = false;
+			tfNombre.setBorder(bordeRojo);
+		}
+		if(tfNacionalidad.getText().length() == 0) {
+			estado = false;
+			tfNacionalidad.setBorder(bordeRojo);
+		}
+		if(tfDNI.getText().length() == 0) {
+			estado = false;
+			tfDNI.setBorder(bordeRojo);
+		}
+		if(tfCUIT.getText().length() == 0) {
+			estado = false;
+			tfCUIT.setBorder(bordeRojo);
+		}
+		if(tfGrado.getText().length() == 0) {
+			estado = false;
+			tfGrado.setBorder(bordeRojo);
+		}
+		if(tfDomicilio.getText().length() == 0) {
+			estado = false;
+			tfDomicilio.setBorder(bordeRojo);
+		}
+		if(tfCodigoPostal.getText().length() == 0) {
+			estado = false;
+			tfCodigoPostal.setBorder(bordeRojo);
+		}
+		if(tfLocalidad.getText().length() == 0) {
+			estado = false;
+			tfLocalidad.setBorder(bordeRojo);
+		}
+		if(tfEmail.getText().length() == 0) {
+			estado = false;
+			tfEmail.setBorder(bordeRojo);
+		}
+		if(tfTelefono.getText().length() == 0) {
+			estado = false;
+			tfTelefono.setBorder(bordeRojo);
+		}
+		
+		
+		
+		return estado;
 	}
 
 }

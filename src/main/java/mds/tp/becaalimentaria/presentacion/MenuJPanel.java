@@ -41,7 +41,7 @@ public class MenuJPanel extends JPanel {
         add(lblNewLabel);
 
         JLabel lblEscuela = new JLabel("Escuela: "+menuJFrame.getEscuelaLogeada().getNombre());
-        lblEscuela.setBounds(197, 88, 55, 14);
+        lblEscuela.setBounds(197, 88, 150, 14);
         add(lblEscuela);
 
         //contentPane.setLayout(cardLayout);
