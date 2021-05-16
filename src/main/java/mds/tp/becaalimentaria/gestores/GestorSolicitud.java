@@ -2,6 +2,7 @@ package mds.tp.becaalimentaria.gestores;
 
 import java.util.Optional;
 
+import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.BecaAprobada;
 import mds.tp.becaalimentaria.domain.ClasificacionSolicitud;
 import mds.tp.becaalimentaria.domain.Solicitud;
@@ -66,15 +67,15 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 	 * grupo familiar asignado.
 	 */
 	@Override
-	public ClasificacionSolicitud clasificarSolicitud(Solicitud solicitud) {
-		Double sumaIngresoNetoFamiliar = alumnoService.getIngresoFamiliarTotal(solicitud.getAlumnoSolicitante());
+	public ClasificacionSolicitud clasificarSolicitud(Alumno alumnoSolicitante) {
+		Double sumaIngresoNetoFamiliar = alumnoService.getIngresoFamiliarTotal(alumnoSolicitante);
 		if (sumaIngresoNetoFamiliar == null) {
 			System.out
 					.println("[Debug-SolicitudServiceImp-clasificarSolicitud]: la suma del ingreso familiar es nula\n");
 			// TODO: deberia notificar a la interfaz
 			return null; // TODO: evitar return null
 		}
-		Double sumaGastoEnfermedad = alumnoService.getGastoEnfermedadCronica(solicitud.getAlumnoSolicitante());
+		Double sumaGastoEnfermedad = alumnoService.getGastoEnfermedadCronica(alumnoSolicitante);
 		if (sumaGastoEnfermedad == null) {
 			System.out.println("[Debug-SolicitudServiceImp-clasificarSolicitud]: la suma del gasto familiar es nula\n");
 			// TODO: deberia notificar a la interfaz
@@ -84,7 +85,7 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 		if (diferenciaIngresoGasto < 0.0) {
 			diferenciaIngresoGasto = 0.0;
 		}
-		Integer cantidadHermanos = alumnoService.getCantidadHermanos(solicitud.getAlumnoSolicitante());
+		Integer cantidadHermanos = alumnoService.getCantidadHermanos(alumnoSolicitante);
 
 		return analizarSolicitud(diferenciaIngresoGasto, cantidadHermanos);
 	

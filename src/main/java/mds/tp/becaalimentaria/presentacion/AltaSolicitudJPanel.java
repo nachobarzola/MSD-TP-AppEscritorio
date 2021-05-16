@@ -7,7 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import mds.tp.becaalimentaria.domain.Alumno;
+import mds.tp.becaalimentaria.domain.ClasificacionSolicitud;
 import mds.tp.becaalimentaria.gestores.GestorAlumno;
+import mds.tp.becaalimentaria.gestores.GestorSolicitud;
 
 import java.awt.event.ActionListener;
 import java.util.Optional;
@@ -31,6 +33,8 @@ public class AltaSolicitudJPanel extends JPanel {
 	private JButton btnAtras;
 	private MenuJFrame menuJFrame;
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
+	private GestorSolicitud solicitudService = GestorSolicitud.getInstance();
+	private Alumno alumnoObtenido;
 
 	public AltaSolicitudJPanel(MenuJFrame menuJFrame) {
 		this.menuJFrame = menuJFrame;
@@ -92,6 +96,12 @@ public class AltaSolicitudJPanel extends JPanel {
 		// ----- BUTTON ------//
 
 		btnConsultar = new JButton("Consultar estado");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClasificacionSolicitud clasificacionSolicitud = solicitudService.clasificarSolicitud(alumnoObtenido);
+				lblEstadoSolic.setText("Solicitud: "+String.valueOf(clasificacionSolicitud));
+			}
+		});
 		btnConsultar.setBounds(350, 280, 150, 20);
 		btnConsultar.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(btnConsultar);
@@ -109,21 +119,20 @@ public class AltaSolicitudJPanel extends JPanel {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Optional<Alumno> optAlumnoObtenido = alumnoService.findByDni(tfBusqueda.getText());
+				alumnoObtenido = optAlumnoObtenido.get();
 				actualizarInterfaz(optAlumnoObtenido.get());
 			}
 		});
 		btnBuscar.setBounds(510, 59, 89, 23);
 		add(btnBuscar);
-		
-		
 
 	}
-	
+
 	private void actualizarInterfaz(Alumno alumnoObtenido) {
 		lblNombreValor.setText(alumnoObtenido.getNombre());
 		lblApellidoValor.setText(alumnoObtenido.getApellido());
 		lblDniValor.setText(alumnoObtenido.getDni());
-		
+
 	}
 
 }
