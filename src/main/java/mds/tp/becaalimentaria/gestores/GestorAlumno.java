@@ -39,7 +39,7 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	
 	private HermanoDaoImp hermanoRepo = HermanoDaoImp.getInstance();
 
-	
+	private EnfermedadCronicaDaoImp enfermedadCronicaRepo = EnfermedadCronicaDaoImp.getInstance();
 	// ---------------------------------------------------
 
 	@Override
@@ -187,17 +187,13 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	@Override
 	public Optional<GrupoFamiliar> asignarEnfermedadCronicaGrupoFamiliar(GrupoFamiliar grupoFamiliar,
 			EnfermedadCronica enfermedadCronica) {
-		if (grupoFamiliar.getListaEnfermedadCronica().size() == 0) {
+
+		grupoFamiliar.addEnfermedadCronica(enfermedadCronica);
+		enfermedadCronica.setGrupoFamiliar(grupoFamiliar);
+		if (enfermedadCronicaRepo.save(enfermedadCronica) == null) {
 			return Optional.empty();
 		}
-		// Tiene EnfermedadCronica, Los que guardan la relacion es la clase
-		// EnfermedadCronica
-		// Debo guardar relacion por cada EnfermedadCronica
-		for (EnfermedadCronica unaEnf : grupoFamiliar.getListaEnfermedadCronica()) {
-			if (EnfermedadCronicaDaoImp.getInstance().save(unaEnf) == null) {
-				return Optional.empty();
-			}
-		}
+		
 		return Optional.of(grupoFamiliar);
 	}
 

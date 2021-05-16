@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import mds.tp.becaalimentaria.domain.EnfermedadCronica;
 import mds.tp.becaalimentaria.domain.GrupoFamiliar;
 import mds.tp.becaalimentaria.domain.Hermano;
 import mds.tp.becaalimentaria.domain.ProgenitorTutor;
@@ -23,10 +24,12 @@ import java.util.Optional;
 public class AltaGrupoFamiliarJPanel extends JPanel {
 	private JTable tableProgenitorTutor;
 	private JTable tableHermano;
+	private JTable tableEnfermedadCronica;
 	private MenuJFrame menuJFrame;
 	private AltaGrupoFamiliarJPanel altaGrupoFamiliarJPanel;
 	private GrupoFamiliar grupoFamiliarNuevo;
 	private JButton btnAgregarHermano;
+	private JButton btnAgregarEnfermedadCronica;
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 
 	/**
@@ -46,12 +49,19 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		scrollPane.setViewportView(tableProgenitorTutor);
 		
 		JScrollPane scrollPaneHermanos = new JScrollPane();
-		scrollPaneHermanos.setBounds(22, 353, 500, 104);
+		scrollPaneHermanos.setBounds(22, 329, 500, 104);
 		add(scrollPaneHermanos);
 		tableHermano = new JTable();
 		tableHermano.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Nombre", "Apellido",
 				"Edad", "Ocupacion", "Escuela", "Convive" }));
 		scrollPaneHermanos.setViewportView(tableHermano);
+		
+		JScrollPane scrollPaneEnfermedad = new JScrollPane();
+		scrollPaneEnfermedad.setBounds(22, 494, 500, 104);
+		add(scrollPaneEnfermedad);
+		tableEnfermedadCronica = new JTable();
+		tableEnfermedadCronica.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Diagnóstico", "Gasto mensual" }));
+		scrollPaneEnfermedad.setViewportView(tableEnfermedadCronica);
 
 		
 		JLabel lblNewLabel = new JLabel("Progenitor/Tutor:");
@@ -63,13 +73,36 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		add(btnAgregarProgenitorTutor);
 		
 		JLabel lblNewLabel_1 = new JLabel("Hermanos:");
-		lblNewLabel_1.setBounds(22, 328, 79, 14);
+		lblNewLabel_1.setBounds(22, 304, 79, 14);
 		add(lblNewLabel_1);
 		
 		btnAgregarHermano = new JButton("Agregar");
-		btnAgregarHermano.setBounds(433, 319, 89, 23);
+		btnAgregarHermano.setBounds(433, 295, 89, 23);
 		btnAgregarHermano.setEnabled(false);
 		add(btnAgregarHermano);
+		
+		JLabel lblNewLabel_2 = new JLabel("Enfermedades crónicas: ");
+		lblNewLabel_2.setBounds(22, 472, 144, 14);
+		add(lblNewLabel_2);
+		
+		btnAgregarEnfermedadCronica = new JButton("Agregar");
+		btnAgregarEnfermedadCronica.setBounds(433, 468, 89, 23);
+		btnAgregarEnfermedadCronica.setEnabled(false);
+		add(btnAgregarEnfermedadCronica);
+		
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.setBounds(240, 680, 89, 23);
+		add(btnFinalizar);
+		
+		btnAgregarEnfermedadCronica.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AltaEnfermedadCronicaJFrame altaEnfermedadCronicaJFrame = new AltaEnfermedadCronicaJFrame(altaGrupoFamiliarJPanel,grupoFamiliarNuevo);
+				altaEnfermedadCronicaJFrame.setVisible(true);
+				
+			}
+		});
 		
 		
 		btnAgregarHermano.addActionListener(new ActionListener() {
@@ -93,6 +126,13 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 
 			}
 		});
+		
+		btnFinalizar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuJFrame.cambiarVentanaMenu(1);
+			}
+		});
 
 	}
 
@@ -108,6 +148,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 				((DefaultTableModel) tableProgenitorTutor.getModel()).addRow(row);
 			}
 			btnAgregarHermano.setEnabled(true);
+			btnAgregarEnfermedadCronica.setEnabled(true);
 		}
 		tableProgenitorTutor.repaint();
 	}
@@ -125,5 +166,20 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 			}
 		}
 		tableHermano.repaint();
+	}
+
+	public void actualizarTablaEnfermedadCronica(GrupoFamiliar grupoFamiliar) {
+		this.grupoFamiliarNuevo = grupoFamiliar;
+		Optional<GrupoFamiliar> grupoFamiliarReturn = alumnoService.getGrupoFamiliar(grupoFamiliar.getId());
+		List<EnfermedadCronica> listaEnfermedadCronica = grupoFamiliarReturn.get().getListaEnfermedadCronica();
+		
+		if (listaEnfermedadCronica.size() > 0) {
+			for (EnfermedadCronica unaEnf : listaEnfermedadCronica) {
+				Object row[] = {unaEnf.getDiagnostico(), unaEnf.getGastoMensual()};
+				((DefaultTableModel) tableEnfermedadCronica.getModel()).addRow(row);
+			}
+		}
+		tableEnfermedadCronica.repaint();
+		
 	}
 }
