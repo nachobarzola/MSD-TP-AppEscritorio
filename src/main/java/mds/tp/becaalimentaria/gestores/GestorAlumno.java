@@ -40,6 +40,8 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	private HermanoDaoImp hermanoRepo = HermanoDaoImp.getInstance();
 
 	private EnfermedadCronicaDaoImp enfermedadCronicaRepo = EnfermedadCronicaDaoImp.getInstance();
+	
+	private AlumnoDaoImp alumnoRepo = AlumnoDaoImp.getInstance();
 	// ---------------------------------------------------
 
 	@Override
@@ -200,6 +202,11 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	@Override
 	public Optional<GrupoFamiliar> getGrupoFamiliar(Integer idGrupoFamiliar) {
 		return grupoFamiliarRepo.findById(idGrupoFamiliar);
+	}
+
+	@Override
+	public Optional<Alumno> findByDni(String dni) {
+		return alumnoRepo.findByDni(dni);
 	}
 
 

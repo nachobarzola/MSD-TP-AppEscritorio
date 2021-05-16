@@ -23,6 +23,7 @@ public class MenuJFrame extends JFrame {
 	private MenuJPanel panelMenu;
 	private MenuAlumnoJPanel panelMenuAlumno;
 	private AltaGrupoFamiliarJPanel panelAltaGrupoFamiliar;
+	private AltaSolicitudJPanel panelAltaSolicitud;
 	
 	private CardLayout cardLayout= new CardLayout();
 	private MenuJFrame menuJFrame;
@@ -77,6 +78,12 @@ public class MenuJFrame extends JFrame {
 			panelAltaGrupoFamiliar = new AltaGrupoFamiliarJPanel(this);
 			contentPane.add(panelAltaGrupoFamiliar,"4");
 			cardLayout.show(contentPane, "4");
+			break;
+		case 5: //Alta solicitud
+			this.setTitle("Agregar solicitud");
+			panelAltaSolicitud = new AltaSolicitudJPanel(this);
+			contentPane.add(panelAltaSolicitud,"5");
+			cardLayout.show(contentPane, "5");
 			break;
 		
 		

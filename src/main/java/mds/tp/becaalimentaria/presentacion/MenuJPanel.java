@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import mds.tp.becaalimentaria.domain.Escuela;
+import java.awt.Font;
 
 
 public class MenuJPanel extends JPanel {
@@ -19,18 +20,29 @@ public class MenuJPanel extends JPanel {
 	 */
 	public MenuJPanel(MenuJFrame frame) {
 		this.menuJFrame = frame;
+		setLayout(null);
 		
 		JButton btnAlumno = new JButton("Alumno");
-        add(btnAlumno, "name_903094095131900");
+		btnAlumno.setBounds(185, 113, 85, 23);
+        add(btnAlumno);
 
         JButton btnSolicitudes = new JButton("Solicitudes");
-        add(btnSolicitudes, "name_903094110897200");
+        btnSolicitudes.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		menuJFrame.cambiarVentanaMenu(5);
+        	}
+        });
+        btnSolicitudes.setBounds(185, 158, 91, 23);
+        add(btnSolicitudes);
 
         JLabel lblNewLabel = new JLabel("MENU");
-        add(lblNewLabel, "name_903094126363500");
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblNewLabel.setBounds(204, 46, 48, 23);
+        add(lblNewLabel);
 
-        JLabel lblEscuela = new JLabel(menuJFrame.getEscuelaLogeada().getNombre());
-        add(lblEscuela, "name_903094143766800");
+        JLabel lblEscuela = new JLabel("Escuela: "+menuJFrame.getEscuelaLogeada().getNombre());
+        lblEscuela.setBounds(197, 88, 55, 14);
+        add(lblEscuela);
 
         //contentPane.setLayout(cardLayout);
         btnAlumno.addActionListener(new ActionListener() {

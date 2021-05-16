@@ -22,7 +22,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="ALUMNO", uniqueConstraints = 
-{@UniqueConstraint(columnNames={"ID_ALUMNO"})})
+{@UniqueConstraint(columnNames={"dni"})})
 public class Alumno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //valor autonumerico

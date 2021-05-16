@@ -7,8 +7,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import mds.tp.becaalimentaria.domain.Alumno;
+import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.gestores.dao.interfaces.AlumnoDao;
 
 public class AlumnoDaoImp implements AlumnoDao {
@@ -95,5 +97,27 @@ public class AlumnoDaoImp implements AlumnoDao {
 		}
 		return Optional.of(alumno);
 	}
+
+	@Override
+	public Optional<Alumno> findByDni(String dni) {
+		EntityManager em = emf.createEntityManager();
+		String query = "SELECT a FROM Alumno a WHERE a.dni = :dni";
+		TypedQuery<Alumno> alumTq = em.createQuery(query,Alumno.class);
+		alumTq.setParameter("dni", dni);
+		Alumno alum = null;
+		try {
+			alum = alumTq.getSingleResult();
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+			return Optional.empty();
+		} finally {
+			em.close();
+		}
+
+		return Optional.of(alum);
+		
+	}
+	
+	
 
 }
