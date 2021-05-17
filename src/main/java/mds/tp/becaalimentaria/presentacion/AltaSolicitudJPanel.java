@@ -120,7 +120,7 @@ public class AltaSolicitudJPanel extends JPanel {
 
 		btnConsultar = new JButton("Consultar estado");
 		btnConsultar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
 				ClasificacionSolicitud clasificacionSolicitud = solicitudService.clasificarSolicitud(alumnoObtenido);
 				lblEstadoSolic.setText("Solicitud: "+String.valueOf(clasificacionSolicitud));
 			}
@@ -151,10 +151,13 @@ public class AltaSolicitudJPanel extends JPanel {
 				if(optAlumnoObtenido.isPresent()) {
 					alumnoObtenido = optAlumnoObtenido.get();
 					actualizarInterfaz(optAlumnoObtenido.get());
+					btnConsultar.setEnabled(true);
 				}
 				else {
 					JOptionPane.showMessageDialog(frmAltaSolicitud, "El alumno no se encuentra registrado", "Error",
 							JOptionPane.ERROR_MESSAGE);
+					btnConsultar.setEnabled(false);
+
 				}
 				
 				
@@ -162,6 +165,7 @@ public class AltaSolicitudJPanel extends JPanel {
 		});
 		btnBuscar.setBounds(449, 123, 89, 23);
 		add(btnBuscar);
+		btnConsultar.setEnabled(false);
 
 	}
 
