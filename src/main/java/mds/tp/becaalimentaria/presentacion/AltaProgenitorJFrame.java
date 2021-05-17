@@ -292,7 +292,7 @@ public class AltaProgenitorJFrame extends JFrame {
 			estado = false;
 			tfIngresosNetos.setBorder(bordeRojo);
 		}
-		if(btnRadioConviveSi.isSelected() == false && btnRadioConviveSi.isSelected() == false ) {
+		if((btnRadioConviveSi.isSelected() == false) && (btnRadioConviveNo.isSelected() == false) ) {
 			lblNewLabel_8.setBorder(bordeRojo);
 			estado = false;
 			}

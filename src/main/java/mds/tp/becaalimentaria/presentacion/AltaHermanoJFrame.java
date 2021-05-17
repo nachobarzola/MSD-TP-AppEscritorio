@@ -260,7 +260,7 @@ public class AltaHermanoJFrame extends JFrame {
 			estado = false;
 			tfEscuela.setBorder(bordeRojo);
 		}
-		if(btnRadioConviveSi.isSelected() == false && btnRadioConviveSi.isSelected() == false ) {
+		if((btnRadioConviveSi.isSelected() == false) && (btnRadioConviveNo.isSelected() == false) ) {
 			lblNewLabel_8.setBorder(bordeRojo);
 			estado = false;
 			}
