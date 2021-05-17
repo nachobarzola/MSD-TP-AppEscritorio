@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.EnfermedadCronica;
 import mds.tp.becaalimentaria.domain.GrupoFamiliar;
 import mds.tp.becaalimentaria.domain.Hermano;
@@ -31,11 +32,11 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 	private JButton btnAgregarHermano;
 	private JButton btnAgregarEnfermedadCronica;
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
-
-	/**
-	 * Create the panel.
-	 */
-	public AltaGrupoFamiliarJPanel(MenuJFrame frame) {
+	private Alumno alumnoEnProgreso;
+	
+	
+	public AltaGrupoFamiliarJPanel(MenuJFrame frame, Alumno alumno) {
+		this.alumnoEnProgreso= alumno; 
 		setLayout(null);
 		this.menuJFrame = frame;
 		this.altaGrupoFamiliarJPanel = this;
@@ -123,7 +124,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AltaProgenitorJFrame altaProgenitorJFrame = new AltaProgenitorJFrame(altaGrupoFamiliarJPanel);
+				AltaProgenitorJFrame altaProgenitorJFrame = new AltaProgenitorJFrame(altaGrupoFamiliarJPanel, alumnoEnProgreso);
 				altaProgenitorJFrame.setVisible(true);
 
 			}

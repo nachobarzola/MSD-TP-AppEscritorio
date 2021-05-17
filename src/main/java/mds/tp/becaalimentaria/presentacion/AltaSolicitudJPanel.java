@@ -62,7 +62,7 @@ public class AltaSolicitudJPanel extends JPanel {
 		lblDni.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblDni);
 
-		lblDniValor = new JLabel("38445779 BD"); // traer de la BD
+		lblDniValor = new JLabel(""); // traer de la BD
 		lblDniValor.setBounds(349, 214, 200, 20);
 		lblDniValor.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblDniValor);
@@ -72,7 +72,7 @@ public class AltaSolicitudJPanel extends JPanel {
 		lblNombre.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblNombre);
 
-		lblNombreValor = new JLabel("Juancito Ariel BD"); // traer de la BD
+		lblNombreValor = new JLabel(""); // traer de la BD
 		lblNombreValor.setBounds(349, 254, 200, 20);
 		lblNombreValor.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblNombreValor);
@@ -82,12 +82,12 @@ public class AltaSolicitudJPanel extends JPanel {
 		lblApellido.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblApellido);
 
-		lblApellidoValor = new JLabel("Gómez BD"); // traer de la BD
+		lblApellidoValor = new JLabel(""); // traer de la BD
 		lblApellidoValor.setBounds(349, 294, 200, 20);
 		lblApellidoValor.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblApellidoValor);
 
-		lblEstadoSolic = new JLabel("Solicitud Aprobada BD"); // traer de la BD
+		lblEstadoSolic = new JLabel("Solicitud:"); // traer de la BD
 		lblEstadoSolic.setBounds(309, 394, 200, 20);
 		lblEstadoSolic.setVisible(true); // habilitar si se encuentra el alumno en la BD
 

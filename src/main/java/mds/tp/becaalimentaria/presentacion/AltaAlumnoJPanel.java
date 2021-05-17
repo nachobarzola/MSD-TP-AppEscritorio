@@ -270,7 +270,7 @@ public class AltaAlumnoJPanel extends JPanel {
 							    int optionType = JOptionPane.DEFAULT_OPTION;
 							    int result = JOptionPane.showConfirmDialog(menuJFrame, text, title, optionType);
 							    if (result == JOptionPane.OK_OPTION) {
-							       menuJFrame.cambiarVentanaMenu(4);
+							       menuJFrame.cambiarVentanaMenu(4,optAlumnoReturn.get());
 							    }
 							
 						} else {
