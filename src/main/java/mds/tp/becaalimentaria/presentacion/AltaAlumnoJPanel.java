@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import com.toedter.calendar.JDateChooser;
+
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Direccion;
 import mds.tp.becaalimentaria.domain.Turno;
@@ -18,11 +20,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Optional;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+
+
+
+
 
 public class AltaAlumnoJPanel extends JPanel {
 
@@ -32,17 +40,17 @@ public class AltaAlumnoJPanel extends JPanel {
 	private JTextField tfDNI;
 	private JTextField tfCUIT;
 	private JTextField tfGrado;
-	private JTextField tfFecha;
 	private JTextField tfDomicilio;
 	private JTextField tfCodigoPostal;
 	private JButton btnAgregarAlumno;
+	private JButton btnAtras;
 	private JLabel lblNewLabel_11;
 	private JLabel lblNewLabel_12;
 	private JTextField tfLocalidad;
 	private JTextField tfEmail;
 	private JTextField tfTelefono;
 	private JComboBox comboTurno;
-
+	final JDateChooser fechaNac;
 	private MenuJFrame menuJFrame;
 	
 	//Border compound;
@@ -120,6 +128,23 @@ public class AltaAlumnoJPanel extends JPanel {
 		tfDNI.setBounds(153, 160, 86, 20);
 		this.add(tfDNI);
 		tfDNI.setColumns(10);
+		//Validacion ingreso de solo numeros y hasta 8 digitos
+		tfDNI.addKeyListener(new KeyAdapter() { 
+			@Override
+			public void keyTyped(KeyEvent e){
+				int max = 7;
+				char caracter = e.getKeyChar();
+				if(((caracter < '0') ||
+							(caracter > '9')) &&
+							(caracter != '\b'))
+				{
+					e.consume();
+				}
+				if(tfDNI.getText().length() > max) {
+					e.consume();
+				}
+			}
+		});
 
 		tfCUIT = new JTextField();
 		tfCUIT.setBounds(153, 188, 86, 20);
@@ -130,11 +155,10 @@ public class AltaAlumnoJPanel extends JPanel {
 		tfGrado.setBounds(155, 219, 86, 20);
 		this.add(tfGrado);
 		tfGrado.setColumns(10);
-
-		tfFecha = new JTextField();
-		tfFecha.setBounds(153, 289, 86, 20);
-		this.add(tfFecha);
-		tfFecha.setColumns(10);
+		
+		fechaNac =  new JDateChooser();
+		fechaNac.setBounds(153, 292, 86, 20);
+		this.add(fechaNac);
 
 		tfDomicilio = new JTextField();
 		tfDomicilio.setBounds(153, 317, 86, 20);
@@ -226,7 +250,7 @@ public class AltaAlumnoJPanel extends JPanel {
 						} else if (turnoSelec.equals("Noche")) {
 							alumno.setTurno(Turno.Noche);
 						}
-						alumno.setFechaDeNacimiento(null);
+						alumno.setFechaDeNacimiento(fechaNac.getDate());
 						Direccion direccion = new Direccion();
 						direccion.setDomicilio(tfDomicilio.getText());
 						direccion.setCodigoPostal(tfCodigoPostal.getText());
@@ -236,6 +260,7 @@ public class AltaAlumnoJPanel extends JPanel {
 						alumno.setTelefono(tfTelefono.getText());
 
 						alumno.setEscuela(menuJFrame.getEscuelaLogeada());
+
 
 						Optional<Alumno> optAlumnoReturn = alumnoService.guardarAlumno(alumno);
 						if (optAlumnoReturn.isPresent()) {
@@ -269,6 +294,15 @@ public class AltaAlumnoJPanel extends JPanel {
 
 			}
 
+		});
+		
+		btnAtras = new JButton("Atrás");
+		btnAtras.setBounds(40, 442, 100, 23);
+		this.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AltaAlumnoJPanel.this.menuJFrame.cambiarVentanaMenu(2);
+			}
 		});
 
 	}
@@ -333,7 +367,10 @@ public class AltaAlumnoJPanel extends JPanel {
 			estado = false;
 			tfTelefono.setBorder(bordeRojo);
 		}
-		
+		if(fechaNac.getDate() == null) {
+			estado = false;
+			fechaNac.setBorder(bordeRojo);
+		}
 		
 		
 		return estado;

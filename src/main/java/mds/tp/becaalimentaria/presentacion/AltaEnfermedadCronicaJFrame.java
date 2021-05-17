@@ -1,15 +1,19 @@
 package mds.tp.becaalimentaria.presentacion;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Optional;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import mds.tp.becaalimentaria.domain.EnfermedadCronica;
@@ -19,6 +23,7 @@ import mds.tp.becaalimentaria.gestores.GestorAlumno;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class AltaEnfermedadCronicaJFrame extends JFrame {
@@ -32,6 +37,7 @@ public class AltaEnfermedadCronicaJFrame extends JFrame {
 	private AltaGrupoFamiliarJPanel panelAnterior;
 	private AltaEnfermedadCronicaJFrame altaEnfermedadCronicaJFrame;
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
+	Border bordeRojo = BorderFactory.createLineBorder(Color.red);
 
 	/**
 	 * Create the frame.
@@ -40,7 +46,7 @@ public class AltaEnfermedadCronicaJFrame extends JFrame {
 		this.panelAnterior = altaGrupoFamiliarJPanel;
 		this.grupoFamiliarNuevo = grupoFamiliarNuevo;
 		this.altaEnfermedadCronicaJFrame = this;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,13 +76,39 @@ public class AltaEnfermedadCronicaJFrame extends JFrame {
 		contentPane.add(tfGastoMensual);
 		tfGastoMensual.setColumns(10);
 		
+		//Valida que el gasto mensual sea un numero y tenga como maximo 6 dígitos
+		tfGastoMensual.addKeyListener(new KeyAdapter() { 
+			@Override
+			   public void keyTyped(KeyEvent e)
+			   {
+					int max = 5;
+					char caracter = e.getKeyChar();
+
+					if(((caracter < '0') ||
+							(caracter > '9')) &&
+							(caracter != '\b'))
+					{
+						e.consume();
+					}
+					if(tfGastoMensual.getText().length() > max) {
+						e.consume();
+					}
+			   }
+		});
+		
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(196, 207, 89, 23);
 		contentPane.add(btnAceptar);
 		
-		btnAtras = new JButton("Atras");
-		btnAtras.setBounds(74, 207, 89, 23);
-		contentPane.add(btnAtras);
+		btnAtras = new JButton("Cancelar");
+		btnAtras.setBounds(100, 207, 89, 23);
+		this.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				altaEnfermedadCronicaJFrame.dispose();
+			}
+		});
+
 		
 		btnAceptar.addActionListener(new ActionListener() {
 			
@@ -111,6 +143,19 @@ public class AltaEnfermedadCronicaJFrame extends JFrame {
 		});
 		
 		
+	}
+	
+	private boolean validarCamposVacios() {
+		boolean estado = true;
+		if(tfDiagnostico.getText().length() == 0) {
+			estado = false;
+			tfDiagnostico.setBorder(bordeRojo);
+		}
+		if(tfGastoMensual.getText().length() == 0) {
+			estado = false;
+			tfGastoMensual.setBorder(bordeRojo);
+		}
+		return estado;
 	}
 
 }

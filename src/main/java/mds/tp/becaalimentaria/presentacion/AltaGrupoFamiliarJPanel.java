@@ -94,6 +94,8 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		btnFinalizar.setBounds(240, 680, 89, 23);
 		add(btnFinalizar);
 		
+		
+		
 		btnAgregarEnfermedadCronica.addActionListener(new ActionListener() {
 			
 			@Override

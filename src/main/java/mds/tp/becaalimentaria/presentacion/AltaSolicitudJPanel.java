@@ -1,10 +1,13 @@
 package mds.tp.becaalimentaria.presentacion;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.ClasificacionSolicitud;
@@ -12,7 +15,10 @@ import mds.tp.becaalimentaria.gestores.GestorAlumno;
 import mds.tp.becaalimentaria.gestores.GestorSolicitud;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Optional;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 public class AltaSolicitudJPanel extends JPanel {
@@ -35,7 +41,7 @@ public class AltaSolicitudJPanel extends JPanel {
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 	private GestorSolicitud solicitudService = GestorSolicitud.getInstance();
 	private Alumno alumnoObtenido;
-
+	Border bordeRojo = BorderFactory.createLineBorder(Color.red);
 	public AltaSolicitudJPanel(MenuJFrame menuJFrame) {
 		this.menuJFrame = menuJFrame;
 
@@ -92,6 +98,23 @@ public class AltaSolicitudJPanel extends JPanel {
 		tfBusqueda = new JTextField();
 		tfBusqueda.setBounds(350, 60, 150, 20);
 		add(tfBusqueda);
+		//Validacion ingreso de solo numeros y hasta 8 digitos
+		tfBusqueda.addKeyListener(new KeyAdapter() { 
+			@Override
+			public void keyTyped(KeyEvent e){
+				int max = 7;
+				char caracter = e.getKeyChar();
+				if(((caracter < '0') ||
+						(caracter > '9')) &&
+						(caracter != '\b'))
+				{
+					e.consume();
+				}
+				if(tfBusqueda.getText().length() > max) {
+					e.consume();
+				}
+			}
+		});
 
 		// ----- BUTTON ------//
 
@@ -114,13 +137,27 @@ public class AltaSolicitudJPanel extends JPanel {
 		btnAtras = new JButton("Atrás");
 		btnAtras.setBounds(310, 370, 100, 20);
 		add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AltaSolicitudJPanel.this.menuJFrame.cambiarVentanaMenu(1);
+			}
+		});
+		
 
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Optional<Alumno> optAlumnoObtenido = alumnoService.findByDni(tfBusqueda.getText());
-				alumnoObtenido = optAlumnoObtenido.get();
-				actualizarInterfaz(optAlumnoObtenido.get());
+				if(optAlumnoObtenido.isPresent()) {
+					alumnoObtenido = optAlumnoObtenido.get();
+					actualizarInterfaz(optAlumnoObtenido.get());
+				}
+				else {
+					JOptionPane.showMessageDialog(frmAltaSolicitud, "El alumno no se encuentra registrado", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
 			}
 		});
 		btnBuscar.setBounds(510, 59, 89, 23);

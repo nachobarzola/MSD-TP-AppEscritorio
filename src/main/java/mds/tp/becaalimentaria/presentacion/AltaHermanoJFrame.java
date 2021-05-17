@@ -1,10 +1,13 @@
 package mds.tp.becaalimentaria.presentacion;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Optional;
 
 import javax.swing.JFrame;
@@ -13,12 +16,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import mds.tp.becaalimentaria.domain.GrupoFamiliar;
 import mds.tp.becaalimentaria.domain.Hermano;
 import mds.tp.becaalimentaria.gestores.GestorAlumno;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class AltaHermanoJFrame extends JFrame {
@@ -37,6 +42,9 @@ public class AltaHermanoJFrame extends JFrame {
 	private AltaGrupoFamiliarJPanel panelAnterior;
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 	private AltaHermanoJFrame altaHermanoJFrame;
+	private JLabel lblNewLabel_8;
+	Border bordeRojo = BorderFactory.createLineBorder(Color.red);
+
 	
 	/**
 	 * Create the frame.
@@ -45,7 +53,7 @@ public class AltaHermanoJFrame extends JFrame {
 		this.panelAnterior = altaGrupoFamiliarJPanel;
 		this.grupoFamiliarNuevo = grupoFamiliarNuevo;
 		this.altaHermanoJFrame = this;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 523, 438);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,8 +87,8 @@ public class AltaHermanoJFrame extends JFrame {
 		lblNewLabel_5.setBounds(109, 180, 65, 14);
 		contentPane.add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_6 = new JLabel("Lugar de trabajo:");
-		lblNewLabel_6.setBounds(84, 204, 101, 14);
+		JLabel lblNewLabel_6 = new JLabel("Escuela:");
+		lblNewLabel_6.setBounds(109, 204, 101, 14);
 		contentPane.add(lblNewLabel_6);
 		
 		tfApellidos = new JTextField();
@@ -97,6 +105,23 @@ public class AltaHermanoJFrame extends JFrame {
 		tfEdad.setBounds(188, 146, 86, 20);
 		contentPane.add(tfEdad);
 		tfEdad.setColumns(10);
+		//Valida que la edad sea un número y no tenga mas de dos dígitos
+		tfEdad.addKeyListener(new KeyAdapter() { 
+			@Override
+			public void keyTyped(KeyEvent e){
+				int max = 2;
+				char caracter = e.getKeyChar();
+				if(((caracter < '0') ||
+							(caracter > '9')) &&
+							(caracter != '\b'))
+				{
+					e.consume();
+				}
+				if(tfEdad.getText().length() > max) {
+					e.consume();
+				}
+			}
+		});
 		
 		tfOcupacion = new JTextField();
 		tfOcupacion.setBounds(189, 173, 86, 20);
@@ -109,7 +134,7 @@ public class AltaHermanoJFrame extends JFrame {
 		tfEscuela.setColumns(10);
 		
 		
-		JLabel lblNewLabel_8 = new JLabel("¿Convive?");
+		lblNewLabel_8 = new JLabel("¿Convive?");
 		lblNewLabel_8.setBounds(151, 269, 63, 14);
 		contentPane.add(lblNewLabel_8);
 		
@@ -125,9 +150,14 @@ public class AltaHermanoJFrame extends JFrame {
 		btnAceptar.setBounds(247, 334, 89, 23);
 		contentPane.add(btnAceptar);
 		
-		btnAtras = new JButton("Atras");
-		btnAtras.setBounds(84, 334, 89, 23);
-		contentPane.add(btnAtras);
+		btnAtras = new JButton("Cancelar");
+		btnAtras.setBounds(150, 334, 89, 23);
+		this.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				altaHermanoJFrame.dispose();
+			}
+		});
 		
 		
 		//para que haga el deseleccionamiento automatico
@@ -151,47 +181,90 @@ public class AltaHermanoJFrame extends JFrame {
 		
 		btnAceptar.addActionListener(new ActionListener() {
 			
+			
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Hermano hermano = new Hermano();
-				hermano.setApellido(tfApellidos.getText());
-				hermano.setNombre(tfNombres.getText());
-				hermano.setEdad(Integer.valueOf(tfEdad.getText()));
-				hermano.setOcupacion(tfOcupacion.getText());
-				hermano.setEscuela(tfEscuela.getText());
 				
-				if(btnRadioConviveSi.isSelected()) {
-					hermano.setConvive(true);
-				}
-				if(btnRadioConviveNo.isSelected()) {
-					hermano.setConvive(false);
-				}
+				boolean completo = validarCamposVacios();
 				
-				Optional<GrupoFamiliar> optGrupoFamiliarRetur= alumnoService.asignarHermanoGrupoFamiliar(grupoFamiliarNuevo,hermano);
-				
-				if(optGrupoFamiliarRetur.isPresent()) {
-					// guardado correctamente
-					 String text = "Hermano guardado correctamente";
-					    String title = "Exito";
-					    int optionType = JOptionPane.DEFAULT_OPTION;
-					    int result = JOptionPane.showConfirmDialog(altaHermanoJFrame, text, title, optionType);
-					    if (result == JOptionPane.OK_OPTION) {
-					    	altaHermanoJFrame.dispose();
-					    	panelAnterior.actualizarTablaHermano(optGrupoFamiliarRetur.get());
-					    	
-					    }
+				if(completo) {
+					Hermano hermano = new Hermano();
+					hermano.setApellido(tfApellidos.getText());
+					hermano.setNombre(tfNombres.getText());
+					hermano.setEdad(Integer.valueOf(tfEdad.getText()));
+					hermano.setOcupacion(tfOcupacion.getText());
+					hermano.setEscuela(tfEscuela.getText());
+					
+					if(btnRadioConviveSi.isSelected()) {
+						hermano.setConvive(true);
+					}
+					if(btnRadioConviveNo.isSelected()) {
+						hermano.setConvive(false);
+					}
+					
+					Optional<GrupoFamiliar> optGrupoFamiliarRetur= alumnoService.asignarHermanoGrupoFamiliar(grupoFamiliarNuevo,hermano);
+					
+					if(optGrupoFamiliarRetur.isPresent()) {
+						// guardado correctamente
+						 String text = "Hermano guardado correctamente";
+						    String title = "Exito";
+						    int optionType = JOptionPane.DEFAULT_OPTION;
+						    int result = JOptionPane.showConfirmDialog(altaHermanoJFrame, text, title, optionType);
+						    if (result == JOptionPane.OK_OPTION) {
+						    	altaHermanoJFrame.dispose();
+						    	panelAnterior.actualizarTablaHermano(optGrupoFamiliarRetur.get());
+						    	
+						    }
+					}
+					else {
+						// error
+						JOptionPane.showMessageDialog(altaHermanoJFrame, "No se pudo guardar el hermano", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				else {
-					// error
-					JOptionPane.showMessageDialog(altaHermanoJFrame, "No se pudo guardar el hermano", "Error",
+					JOptionPane.showMessageDialog(altaHermanoJFrame, "Debe completar todos los campos", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
+				
+				
 				
 				
 			}
 		});
 		
 		
+		
+	}
+	
+	private boolean validarCamposVacios() {
+		boolean estado = true;
+		if(tfApellidos.getText().length() == 0) {
+			estado = false;
+			tfApellidos.setBorder(bordeRojo);
+		}
+		if(tfNombres.getText().length() == 0) {
+			estado = false;
+			tfNombres.setBorder(bordeRojo);
+		}
+		if(tfEdad.getText().length() == 0) {
+			estado = false;
+			tfEdad.setBorder(bordeRojo);
+		}
+		if(tfOcupacion.getText().length() == 0) {
+			estado = false;
+			tfOcupacion.setBorder(bordeRojo);
+		}
+		if(tfEscuela.getText().length() == 0) {
+			estado = false;
+			tfEscuela.setBorder(bordeRojo);
+		}
+		if(btnRadioConviveSi.isSelected() == false && btnRadioConviveSi.isSelected() == false ) {
+			lblNewLabel_8.setBorder(bordeRojo);
+			estado = false;
+			}
+		return estado;
 		
 	}
 

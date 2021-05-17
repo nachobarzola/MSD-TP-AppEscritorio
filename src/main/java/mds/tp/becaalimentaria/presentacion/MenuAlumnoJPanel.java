@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 public class MenuAlumnoJPanel extends JPanel {
 
 	private MenuJFrame menuJFrame;
+	private JButton btnAtras;
 	
 	/**
 	 * Create the panel.
@@ -31,6 +32,15 @@ public class MenuAlumnoJPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuJFrame.cambiarVentanaMenu(3);
+			}
+		});
+		
+		btnAtras = new JButton("Atrás");
+		btnAtras.setBounds(151, 90, 145, 23);
+		this.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuAlumnoJPanel.this.menuJFrame.cambiarVentanaMenu(1);
 			}
 		});
 

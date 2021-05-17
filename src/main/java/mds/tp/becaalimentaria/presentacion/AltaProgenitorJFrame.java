@@ -1,9 +1,11 @@
 package mds.tp.becaalimentaria.presentacion;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import org.hibernate.mapping.PropertyGeneration;
@@ -18,11 +20,14 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Optional;
 
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class AltaProgenitorJFrame extends JFrame {
@@ -34,8 +39,12 @@ public class AltaProgenitorJFrame extends JFrame {
 	private JTextField tfOcupacion;
 	private JTextField tfLugarDeTrabajo;
 	private JTextField tfIngresosNetos;
+	private JLabel lblNewLabel_8;
+	private JButton btnAtras;
 	private JRadioButton btnRadioConviveSi;
 	private JRadioButton btnRadioConviveNo;
+	Border bordeRojo = BorderFactory.createLineBorder(Color.red);
+	
 	
 	private AltaGrupoFamiliarJPanel panelAnterior;
 	private AltaProgenitorJFrame altaProgenitorJFrame;
@@ -45,7 +54,7 @@ public class AltaProgenitorJFrame extends JFrame {
 	public AltaProgenitorJFrame(AltaGrupoFamiliarJPanel panelAnt) {
 		this.altaProgenitorJFrame = this;
 		this.panelAnterior = panelAnt;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -97,6 +106,26 @@ public class AltaProgenitorJFrame extends JFrame {
 		contentPane.add(tfEdad);
 		tfEdad.setColumns(10);
 		
+		//Validacion ingreso de solo numeros y hasta 3 digitos
+		tfEdad.addKeyListener(new KeyAdapter() { 
+			@Override
+			   public void keyTyped(KeyEvent e)
+			   {
+					int max = 1;
+					char caracter = e.getKeyChar();
+
+					if(((caracter < '0') ||
+							(caracter > '9')) &&
+							(caracter != '\b'))
+					{
+						e.consume();
+					}
+					if(tfEdad.getText().length() > max) {
+						e.consume();
+					}
+			   }
+		});
+		
 		tfOcupacion = new JTextField();
 		tfOcupacion.setBounds(189, 173, 86, 20);
 		contentPane.add(tfOcupacion);
@@ -116,7 +145,27 @@ public class AltaProgenitorJFrame extends JFrame {
 		contentPane.add(tfIngresosNetos);
 		tfIngresosNetos.setColumns(10);
 		
-		JLabel lblNewLabel_8 = new JLabel("¿Convive?");
+		//Validacion ingreso solo numeros y hasta 6 digitos
+		tfIngresosNetos.addKeyListener(new KeyAdapter() { 
+			@Override
+			   public void keyTyped(KeyEvent e)
+			   {
+					int max = 5;
+					char caracter = e.getKeyChar();
+
+					if(((caracter < '0') ||
+							(caracter > '9')) &&
+							(caracter != '\b'))
+					{
+						e.consume();
+					}
+					if(tfIngresosNetos.getText().length() > max) {
+						e.consume();
+					}
+			   }
+		});
+		
+		lblNewLabel_8 = new JLabel("¿Convive?");
 		lblNewLabel_8.setBounds(151, 269, 63, 14);
 		contentPane.add(lblNewLabel_8);
 		
@@ -150,55 +199,104 @@ public class AltaProgenitorJFrame extends JFrame {
 		btnAceptar.setBounds(229, 326, 89, 23);
 		contentPane.add(btnAceptar);
 		
-		JButton btnAtras = new JButton("Atras");
-		btnAtras.setBounds(123, 326, 89, 23);
-		contentPane.add(btnAtras);
+		btnAtras = new JButton("Cancelar");
+		btnAtras.setBounds(120, 326, 89, 23);
+		this.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				altaProgenitorJFrame.dispose();
+			}
+		});
 		
 		btnAceptar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ProgenitorTutor progenitorTutor = new ProgenitorTutor();
-				progenitorTutor.setApellido(tfApellidos.getText());
-				progenitorTutor.setNombre(tfNombres.getText());
-				progenitorTutor.setIngresoNeto(Double.valueOf(tfIngresosNetos.getText()));
-				progenitorTutor.setEdad(Integer.valueOf(tfEdad.getText()));
-				progenitorTutor.setOcupacion(tfOcupacion.getText());
-				progenitorTutor.setLugarDeTrabajo(tfLugarDeTrabajo.getText());
-				if(btnRadioConviveSi.isSelected()) {
-					progenitorTutor.setConvive(true);
-				}
-				if(btnRadioConviveNo.isSelected()) {
-					progenitorTutor.setConvive(false);
-				}
-				//Cremos el grupo familiar
-				GrupoFamiliar grupoFamiliar = new GrupoFamiliar();
-				grupoFamiliar.addProgenitorTutor(progenitorTutor);
-				progenitorTutor.setGrupoFamiliar(grupoFamiliar);
-				
-				Optional<GrupoFamiliar> optGrupoFamiliarRetur = alumnoService.guardarGrupoFamiliar(grupoFamiliar);
-				if(optGrupoFamiliarRetur.isPresent()) {
-					// guardado correctamente
-					 String text = "Progeitor guardado correctamente";
-					    String title = "Exito";
-					    int optionType = JOptionPane.DEFAULT_OPTION;
-					    int result = JOptionPane.showConfirmDialog(altaProgenitorJFrame, text, title, optionType);
-					    if (result == JOptionPane.OK_OPTION) {
-					    	altaProgenitorJFrame.dispose();
-					    	panelAnterior.actualizarTablaProgenitor(grupoFamiliar);
-					    	
-					    }
+				boolean completo = validarCamposVacios();
+				if(completo) {
+					
+					ProgenitorTutor progenitorTutor = new ProgenitorTutor();
+					progenitorTutor.setApellido(tfApellidos.getText());
+					progenitorTutor.setNombre(tfNombres.getText());
+					progenitorTutor.setIngresoNeto(Double.valueOf(tfIngresosNetos.getText()));
+					progenitorTutor.setEdad(Integer.valueOf(tfEdad.getText()));
+					progenitorTutor.setOcupacion(tfOcupacion.getText());
+					progenitorTutor.setLugarDeTrabajo(tfLugarDeTrabajo.getText());
+					if(btnRadioConviveSi.isSelected()) {
+						progenitorTutor.setConvive(true);
+					}
+					if(btnRadioConviveNo.isSelected()) {
+						progenitorTutor.setConvive(false);
+					}
+					//Cremos el grupo familiar
+					GrupoFamiliar grupoFamiliar = new GrupoFamiliar();
+					grupoFamiliar.addProgenitorTutor(progenitorTutor);
+					progenitorTutor.setGrupoFamiliar(grupoFamiliar);
+					
+					Optional<GrupoFamiliar> optGrupoFamiliarRetur = alumnoService.guardarGrupoFamiliar(grupoFamiliar);
+					if(optGrupoFamiliarRetur.isPresent()) {
+						// guardado correctamente
+						 String text = "Progenitor guardado correctamente";
+						    String title = "Exito";
+						    int optionType = JOptionPane.DEFAULT_OPTION;
+						    int result = JOptionPane.showConfirmDialog(altaProgenitorJFrame, text, title, optionType);
+						    if (result == JOptionPane.OK_OPTION) {
+						    	altaProgenitorJFrame.dispose();
+						    	panelAnterior.actualizarTablaProgenitor(grupoFamiliar);
+						    	
+						    }
+					}
+					else {
+						// error
+						JOptionPane.showMessageDialog(altaProgenitorJFrame, "No se pudo guardar el progenitor", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+					
 				}
 				else {
-					// error
-					JOptionPane.showMessageDialog(altaProgenitorJFrame, "No se pudo guardar el progenitor", "Error",
+					JOptionPane.showMessageDialog(altaProgenitorJFrame, "Debe completar todos los campos", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
+				
 				
 			}
 		});
 		
 		
+		
+	}
+	
+	private boolean validarCamposVacios() {
+		boolean estado = true;
+		if(tfApellidos.getText().length() == 0) {
+			estado = false;
+			tfApellidos.setBorder(bordeRojo);
+		}
+		if(tfNombres.getText().length() == 0) {
+			estado = false;
+			tfNombres.setBorder(bordeRojo);
+		}
+		if(tfEdad.getText().length() == 0) {
+			estado = false;
+			tfEdad.setBorder(bordeRojo);
+		}
+		if(tfOcupacion.getText().length() == 0) {
+			estado = false;
+			tfOcupacion.setBorder(bordeRojo);
+		}
+		if(tfLugarDeTrabajo.getText().length() == 0) {
+			estado = false;
+			tfLugarDeTrabajo.setBorder(bordeRojo);
+		}
+		if(tfIngresosNetos.getText().length() == 0) {
+			estado = false;
+			tfIngresosNetos.setBorder(bordeRojo);
+		}
+		if(btnRadioConviveSi.isSelected() == false && btnRadioConviveSi.isSelected() == false ) {
+			lblNewLabel_8.setBorder(bordeRojo);
+			estado = false;
+			}
+		return estado;
 		
 	}
 }

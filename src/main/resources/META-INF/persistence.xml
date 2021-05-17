@@ -35,7 +35,7 @@ mapped to database tables. Database driver, location, userid and pw
             <!-- Username -->
             <property name="javax.persistence.jdbc.user" value="postgres" />
             <!-- Password -->
-            <property name="javax.persistence.jdbc.password" value="friggeri2" />
+            <property name="javax.persistence.jdbc.password" value="admin" />
         	<property name="hibernate.hbm2ddl.auto" value="none" />
         </properties>
     </persistence-unit>
