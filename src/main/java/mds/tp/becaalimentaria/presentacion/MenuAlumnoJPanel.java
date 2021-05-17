@@ -24,7 +24,7 @@ public class MenuAlumnoJPanel extends JPanel {
 		setLayout(null);
 		
 		JButton btnNuevoAlumno = new JButton("Nuevo alumno");
-		btnNuevoAlumno.setBounds(151, 64, 145, 23);
+		btnNuevoAlumno.setBounds(248, 211, 145, 23);
 		add(btnNuevoAlumno);
 		
 		btnNuevoAlumno.addActionListener(new ActionListener() {
@@ -36,7 +36,7 @@ public class MenuAlumnoJPanel extends JPanel {
 		});
 		
 		btnAtras = new JButton("Atrás");
-		btnAtras.setBounds(151, 90, 145, 23);
+		btnAtras.setBounds(248, 277, 145, 23);
 		this.add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -68,64 +68,64 @@ public class AltaAlumnoJPanel extends JPanel {
 		this.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Apellidos: ");
-		lblNewLabel.setBounds(57, 73, 76, 14);
+		lblNewLabel.setBounds(103, 83, 76, 14);
 		this.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Nombres: ");
-		lblNewLabel_1.setBounds(57, 100, 76, 14);
+		lblNewLabel_1.setBounds(103, 110, 76, 14);
 		this.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_2 = new JLabel("Nacionalidad: ");
-		lblNewLabel_2.setBounds(57, 125, 76, 14);
+		lblNewLabel_2.setBounds(103, 135, 91, 14);
 		this.add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("DNI: ");
-		lblNewLabel_3.setBounds(57, 163, 76, 14);
+		lblNewLabel_3.setBounds(103, 173, 76, 14);
 		this.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("CUIL: ");
-		lblNewLabel_4.setBounds(57, 188, 76, 14);
+		lblNewLabel_4.setBounds(103, 198, 76, 14);
 		this.add(lblNewLabel_4);
 
 		JLabel lblNewLabel_5 = new JLabel("Grado/Año");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel_5.setBounds(58, 213, 64, 20);
+		lblNewLabel_5.setBounds(104, 223, 64, 20);
 		this.add(lblNewLabel_5);
 
 		JLabel lblNewLabel_6 = new JLabel("Turno: ");
-		lblNewLabel_6.setBounds(57, 267, 76, 14);
+		lblNewLabel_6.setBounds(103, 277, 76, 14);
 		this.add(lblNewLabel_6);
 
 		JLabel lblNewLabel_7 = new JLabel("Fecha");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel_7.setBounds(57, 292, 40, 14);
+		lblNewLabel_7.setBounds(103, 302, 40, 14);
 		this.add(lblNewLabel_7);
 
 		JLabel lblNewLabel_8 = new JLabel("Domicilio: ");
-		lblNewLabel_8.setBounds(57, 326, 76, 14);
+		lblNewLabel_8.setBounds(103, 336, 76, 14);
 		this.add(lblNewLabel_8);
 
 		JLabel lblNewLabel_9 = new JLabel("Código postal: ");
-		lblNewLabel_9.setBounds(57, 352, 76, 14);
+		lblNewLabel_9.setBounds(103, 362, 86, 14);
 		this.add(lblNewLabel_9);
 
 		tfApellido = new JTextField();
-		tfApellido.setBounds(153, 70, 86, 20);
+		tfApellido.setBounds(199, 80, 115, 20);
 		this.add(tfApellido);
 		tfApellido.setColumns(10);
 
 		tfNombre = new JTextField();
-		tfNombre.setBounds(153, 94, 86, 20);
+		tfNombre.setBounds(199, 104, 115, 20);
 		this.add(tfNombre);
 		tfNombre.setColumns(10);
 
 		tfNacionalidad = new JTextField();
-		tfNacionalidad.setBounds(153, 122, 86, 20);
+		tfNacionalidad.setBounds(199, 132, 115, 20);
 		this.add(tfNacionalidad);
 		tfNacionalidad.setColumns(10);
 
 		tfDNI = new JTextField();
-		tfDNI.setBounds(153, 160, 86, 20);
+		tfDNI.setBounds(199, 170, 115, 20);
 		this.add(tfDNI);
 		tfDNI.setColumns(10);
 		//Validacion ingreso de solo numeros y hasta 8 digitos
@@ -147,80 +147,80 @@ public class AltaAlumnoJPanel extends JPanel {
 		});
 
 		tfCUIT = new JTextField();
-		tfCUIT.setBounds(153, 188, 86, 20);
+		tfCUIT.setBounds(199, 198, 115, 20);
 		this.add(tfCUIT);
 		tfCUIT.setColumns(10);
 
 		tfGrado = new JTextField();
-		tfGrado.setBounds(155, 219, 86, 20);
+		tfGrado.setBounds(201, 229, 113, 20);
 		this.add(tfGrado);
 		tfGrado.setColumns(10);
 		
 		fechaNac =  new JDateChooser();
-		fechaNac.setBounds(153, 292, 86, 20);
+		fechaNac.setBounds(199, 302, 115, 20);
 		this.add(fechaNac);
 
 		tfDomicilio = new JTextField();
-		tfDomicilio.setBounds(153, 317, 86, 20);
+		tfDomicilio.setBounds(199, 327, 115, 20);
 		this.add(tfDomicilio);
 		tfDomicilio.setColumns(10);
 
 		tfCodigoPostal = new JTextField();
-		tfCodigoPostal.setBounds(153, 346, 86, 20);
+		tfCodigoPostal.setBounds(199, 356, 115, 20);
 		this.add(tfCodigoPostal);
 		tfCodigoPostal.setColumns(10);
 
 		JLabel lblNewLabel_10 = new JLabel("Sala/Sección");
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel_10.setBounds(57, 229, 77, 14);
+		lblNewLabel_10.setBounds(103, 239, 77, 14);
 		this.add(lblNewLabel_10);
 
 		btnAgregarAlumno = new JButton("Agregar alumno");
-		btnAgregarAlumno.setBounds(167, 442, 158, 23);
+		btnAgregarAlumno.setBounds(341, 489, 158, 23);
 		this.add(btnAgregarAlumno);
 
 		lblNewLabel_11 = new JLabel("AGREGAR ALUMNO");
 		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_11.setBounds(131, 11, 184, 33);
+		lblNewLabel_11.setBounds(239, 21, 184, 33);
 		this.add(lblNewLabel_11);
 
 		lblNewLabel_12 = new JLabel("de nac.");
 		lblNewLabel_12.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel_12.setBounds(57, 301, 46, 14);
+		lblNewLabel_12.setBounds(103, 311, 46, 14);
 		this.add(lblNewLabel_12);
 
 		comboTurno = new JComboBox();
-		comboTurno.setBounds(153, 259, 86, 22);
+		comboTurno.setBounds(199, 269, 115, 22);
 		comboTurno.addItem("Mañana");
 		comboTurno.addItem("Tarde");
 		comboTurno.addItem("Noche");
 		add(comboTurno);
 
 		JLabel lblNewLabel_9_1 = new JLabel("Localidad:");
-		lblNewLabel_9_1.setBounds(57, 391, 76, 14);
+		lblNewLabel_9_1.setBounds(103, 401, 76, 14);
 		add(lblNewLabel_9_1);
 
 		tfLocalidad = new JTextField();
 		tfLocalidad.setColumns(10);
-		tfLocalidad.setBounds(153, 385, 86, 20);
+		tfLocalidad.setBounds(199, 395, 115, 20);
 		add(tfLocalidad);
 
 		JLabel lblNewLabel_9_1_1 = new JLabel("Email:");
-		lblNewLabel_9_1_1.setBounds(268, 73, 76, 14);
+		lblNewLabel_9_1_1.setBounds(356, 86, 76, 14);
 		add(lblNewLabel_9_1_1);
 
 		tfEmail = new JTextField();
 		tfEmail.setColumns(10);
-		tfEmail.setBounds(353, 70, 86, 20);
+		tfEmail.setBounds(441, 83, 115, 20);
 		add(tfEmail);
 
 		JLabel lblNewLabel_9_1_1_1 = new JLabel("Telefono:");
-		lblNewLabel_9_1_1_1.setBounds(268, 103, 76, 14);
+		lblNewLabel_9_1_1_1.setBounds(356, 116, 76, 14);
 		add(lblNewLabel_9_1_1_1);
 
 		tfTelefono = new JTextField();
 		tfTelefono.setColumns(10);
-		tfTelefono.setBounds(353, 100, 86, 20);
+		tfTelefono.setBounds(441, 113, 115, 20);
 		add(tfTelefono);
 
 		// TODO: metodo temporal, borrar luego
@@ -297,7 +297,7 @@ public class AltaAlumnoJPanel extends JPanel {
 		});
 		
 		btnAtras = new JButton("Atrás");
-		btnAtras.setBounds(40, 442, 100, 23);
+		btnAtras.setBounds(214, 489, 100, 23);
 		this.add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

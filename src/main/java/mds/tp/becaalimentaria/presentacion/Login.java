@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import java.awt.Font;
 
 
 
@@ -57,41 +58,51 @@ public class Login extends JFrame {
 	public Login() {
 		this.loginFrame=this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 524, 374);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		lblNewLabel = new JLabel("Código: ");
-		lblNewLabel.setBounds(127, 74, 46, 14);
+		lblNewLabel.setBounds(193, 108, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("Clave: ");
-		lblNewLabel_1.setBounds(127, 109, 46, 14);
+		lblNewLabel_1.setBounds(193, 143, 46, 14);
 		
 		contentPane.add(lblNewLabel_1);
 		
 		campoCodigo = new JTextField();
-		campoCodigo.setBounds(192, 71, 86, 20);
+		campoCodigo.setBounds(258, 105, 86, 20);
 		contentPane.add(campoCodigo);
 		campoCodigo.setColumns(10);
 		
 		campoClave = new JPasswordField();
-		campoClave.setBounds(192, 106, 86, 20);
+		campoClave.setBounds(258, 140, 86, 20);
 		campoClave.setToolTipText("");
 		campoClave.setEchoChar('*');
 		contentPane.add(campoClave);
 		campoClave.setColumns(10);
 		
 		JButton btnIngresar = new JButton("Ingresar");
-		btnIngresar.setBounds(161, 198, 89, 23);
+		btnIngresar.setBounds(227, 232, 89, 23);
 		contentPane.add(btnIngresar);
 		
 		ingresando = new JLabel("Ingresando...");
-		ingresando.setBounds(181, 236, 97, 14);
+		ingresando.setBounds(247, 270, 97, 14);
 		ingresando.setVisible(false);   
 		contentPane.add(ingresando);
+		
+		JLabel lblNewLabel_2 = new JLabel("SISTEMA DE BECAS ESCOLARES");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_2.setBounds(146, 11, 248, 52);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Ingrese código y clave de su escuela:");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblNewLabel_3.setBounds(166, 74, 219, 14);
+		contentPane.add(lblNewLabel_3);
 		
 		btnIngresar.addActionListener(new ActionListener(){  
 			public void actionPerformed(ActionEvent e){

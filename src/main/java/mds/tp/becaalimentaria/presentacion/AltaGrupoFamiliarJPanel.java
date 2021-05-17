@@ -41,7 +41,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		this.altaGrupoFamiliarJPanel = this;
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 143, 500, 104);
+		scrollPane.setBounds(56, 107, 500, 104);
 		add(scrollPane);
 		tableProgenitorTutor = new JTable();
 		tableProgenitorTutor.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Nombre", "Apellido",
@@ -49,7 +49,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		scrollPane.setViewportView(tableProgenitorTutor);
 		
 		JScrollPane scrollPaneHermanos = new JScrollPane();
-		scrollPaneHermanos.setBounds(22, 329, 500, 104);
+		scrollPaneHermanos.setBounds(56, 293, 500, 104);
 		add(scrollPaneHermanos);
 		tableHermano = new JTable();
 		tableHermano.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Nombre", "Apellido",
@@ -57,7 +57,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		scrollPaneHermanos.setViewportView(tableHermano);
 		
 		JScrollPane scrollPaneEnfermedad = new JScrollPane();
-		scrollPaneEnfermedad.setBounds(22, 494, 500, 104);
+		scrollPaneEnfermedad.setBounds(56, 458, 500, 104);
 		add(scrollPaneEnfermedad);
 		tableEnfermedadCronica = new JTable();
 		tableEnfermedadCronica.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Diagnóstico", "Gasto mensual" }));
@@ -65,33 +65,33 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 
 		
 		JLabel lblNewLabel = new JLabel("Progenitor/Tutor:");
-		lblNewLabel.setBounds(22, 118, 96, 14);
+		lblNewLabel.setBounds(56, 82, 96, 14);
 		add(lblNewLabel);
 
 		JButton btnAgregarProgenitorTutor = new JButton("Agregar");
-		btnAgregarProgenitorTutor.setBounds(433, 109, 89, 23);
+		btnAgregarProgenitorTutor.setBounds(467, 73, 89, 23);
 		add(btnAgregarProgenitorTutor);
 		
 		JLabel lblNewLabel_1 = new JLabel("Hermanos:");
-		lblNewLabel_1.setBounds(22, 304, 79, 14);
+		lblNewLabel_1.setBounds(56, 268, 79, 14);
 		add(lblNewLabel_1);
 		
 		btnAgregarHermano = new JButton("Agregar");
-		btnAgregarHermano.setBounds(433, 295, 89, 23);
+		btnAgregarHermano.setBounds(467, 259, 89, 23);
 		btnAgregarHermano.setEnabled(false);
 		add(btnAgregarHermano);
 		
 		JLabel lblNewLabel_2 = new JLabel("Enfermedades crónicas: ");
-		lblNewLabel_2.setBounds(22, 472, 144, 14);
+		lblNewLabel_2.setBounds(56, 436, 144, 14);
 		add(lblNewLabel_2);
 		
 		btnAgregarEnfermedadCronica = new JButton("Agregar");
-		btnAgregarEnfermedadCronica.setBounds(433, 468, 89, 23);
+		btnAgregarEnfermedadCronica.setBounds(467, 432, 89, 23);
 		btnAgregarEnfermedadCronica.setEnabled(false);
 		add(btnAgregarEnfermedadCronica);
 		
 		JButton btnFinalizar = new JButton("Finalizar");
-		btnFinalizar.setBounds(240, 680, 89, 23);
+		btnFinalizar.setBounds(285, 679, 89, 23);
 		add(btnFinalizar);
 		
 		
