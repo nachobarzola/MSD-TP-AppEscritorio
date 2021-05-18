@@ -11,12 +11,14 @@ import javax.swing.border.Border;
 
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.ClasificacionSolicitud;
+import mds.tp.becaalimentaria.domain.Solicitud;
 import mds.tp.becaalimentaria.gestores.GestorAlumno;
 import mds.tp.becaalimentaria.gestores.GestorSolicitud;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import java.util.Optional;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -41,8 +43,9 @@ public class AltaSolicitudJPanel extends JPanel {
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 	private GestorSolicitud solicitudService = GestorSolicitud.getInstance();
 	private Alumno alumnoObtenido;
+	private ClasificacionSolicitud clasificacionSolicitud;
 	Border bordeRojo = BorderFactory.createLineBorder(Color.red);
-	public AltaSolicitudJPanel(MenuJFrame menuJFrame) {
+	public AltaSolicitudJPanel(final MenuJFrame menuJFrame) {
 		this.menuJFrame = menuJFrame;
 
 		// ----- LABEL ----//
@@ -121,8 +124,9 @@ public class AltaSolicitudJPanel extends JPanel {
 		btnConsultar = new JButton("Consultar estado");
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				ClasificacionSolicitud clasificacionSolicitud = solicitudService.clasificarSolicitud(alumnoObtenido);
+				clasificacionSolicitud = solicitudService.clasificarSolicitud(alumnoObtenido);
 				lblEstadoSolic.setText("Solicitud: "+String.valueOf(clasificacionSolicitud));
+				btnCrearSolicitud.setEnabled(true);
 			}
 		});
 		btnConsultar.setBounds(289, 344, 150, 20);
@@ -130,6 +134,34 @@ public class AltaSolicitudJPanel extends JPanel {
 		add(btnConsultar);
 
 		btnCrearSolicitud = new JButton("Crear solicitud");
+		btnCrearSolicitud.setEnabled(false);
+		btnCrearSolicitud.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Date fechaActual = new Date(System.currentTimeMillis());
+				Solicitud solicitudNueva = new Solicitud();
+				solicitudNueva.setFecha(fechaActual);
+				solicitudNueva.setAlumnoSolicitante(alumnoObtenido);
+				solicitudNueva.setClasificacionSolicitud(clasificacionSolicitud);
+				if((solicitudService.guardarSolicitud(solicitudNueva)).isPresent()) {
+					
+					
+					String text = "La solicitud se creó satisfactoriamente";
+				    String title = "Exito";
+				    int optionType = JOptionPane.DEFAULT_OPTION;
+				    int result = JOptionPane.showConfirmDialog(menuJFrame, text, title, optionType);
+				    if (result == JOptionPane.OK_OPTION) {
+				       menuJFrame.cambiarVentanaMenu(1);
+				    }
+					
+				} else {
+					JOptionPane.showMessageDialog(frmAltaSolicitud, "No se pudo crear la solicitud", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
+			}
+		});
 		btnCrearSolicitud.setBounds(369, 434, 140, 20);
 		btnCrearSolicitud.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(btnCrearSolicitud);
@@ -157,6 +189,7 @@ public class AltaSolicitudJPanel extends JPanel {
 					JOptionPane.showMessageDialog(frmAltaSolicitud, "El alumno no se encuentra registrado", "Error",
 							JOptionPane.ERROR_MESSAGE);
 					btnConsultar.setEnabled(false);
+					btnCrearSolicitud.setEnabled(false);
 
 				}
 				

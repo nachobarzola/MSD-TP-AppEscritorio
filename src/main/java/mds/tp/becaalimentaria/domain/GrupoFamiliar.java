@@ -4,12 +4,16 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name= "GRUPOFAMILIAR",uniqueConstraints = 
@@ -19,13 +23,16 @@ public class GrupoFamiliar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //valor autonumerico
 	@Column(name="ID_GRUPOFAMILIAR")
 	private Integer id;
-	
+
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "grupoFamiliar")
 	private List<Hermano> listaHermano;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "grupoFamiliar")
 	private List<ProgenitorTutor> listaProgenitorTutor;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "grupoFamiliar")
 	private List<EnfermedadCronica> listaEnfermedadCronica;
 	
