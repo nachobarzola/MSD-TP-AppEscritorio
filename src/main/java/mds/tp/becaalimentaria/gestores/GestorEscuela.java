@@ -1,8 +1,5 @@
 package mds.tp.becaalimentaria.gestores;
 
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import mds.tp.becaalimentaria.domain.Alumno;
@@ -18,7 +15,6 @@ public class GestorEscuela implements GestorEscuelaInterface {
 	public static GestorEscuela getInstance() {
 		if (_INSTANCE == null) {
 			_INSTANCE = new GestorEscuela();
-			//_INSTANCE.crearUnaEscuela(); //TODO: borrar desp
 		}
 		return _INSTANCE;
 	}
@@ -54,15 +50,6 @@ public class GestorEscuela implements GestorEscuelaInterface {
 
 		}
 		return Optional.empty();
-	}
-	
-	private void crearUnaEscuela() {
-		
-        Escuela escuela = new Escuela();
-        escuela.setCodigoUnicoEstablecimiento("123");
-        escuela.setClave("123");
-        escuela.setNombre("Pablo A Pizzurno");
-        this.guardarEscuela(escuela);
 	}
 	
 	

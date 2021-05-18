@@ -8,7 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
-import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Solicitud;
 import mds.tp.becaalimentaria.gestores.dao.interfaces.SolicitudDao;
 

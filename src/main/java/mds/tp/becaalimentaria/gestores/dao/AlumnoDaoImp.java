@@ -119,12 +119,12 @@ public class AlumnoDaoImp implements AlumnoDao {
 	}
 
 	@Override
-	public Optional<Alumno> findByDniYEscuela(String dni, Integer idEscuelaLogeada) {
+	public Optional<Alumno> findByDniYEscuela(String dni, Escuela escuelaLogeada) {
 		EntityManager em = emf.createEntityManager();
-		String query = "SELECT a FROM Alumno a WHERE a.dni = :dni AND a.escuela = :esc";
-		TypedQuery<Alumno> alumTq = em.createQuery(query,Alumno.class);
+		String query = "SELECT a FROM Alumno a WHERE (a.dni = :dni AND a.escuela = :escuela)";
+		TypedQuery<Alumno> alumTq = em.createQuery(query, Alumno.class);
 		alumTq.setParameter("dni", dni);
-		alumTq.setParameter("esc", idEscuelaLogeada);
+		alumTq.setParameter("escuela", escuelaLogeada);
 		Alumno alum = null;
 		try {
 			alum = alumTq.getSingleResult();

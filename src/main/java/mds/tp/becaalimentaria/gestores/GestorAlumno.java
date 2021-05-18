@@ -1,6 +1,5 @@
 package mds.tp.becaalimentaria.gestores;
 
-import java.util.List;
 import java.util.Optional;
 
 import mds.tp.becaalimentaria.domain.Alumno;
@@ -33,7 +32,7 @@ public class GestorAlumno implements GestorAlumnoInterface {
 
 	private GestorEscuela escuelaService = GestorEscuela.getInstance();
 	
-	private ProgenitorTutorDaoImp progenitorTutorRepo = ProgenitorTutorDaoImp.getInstance();
+	//private ProgenitorTutorDaoImp progenitorTutorRepo = ProgenitorTutorDaoImp.getInstance();
 
 	private GrupoFamiliarDaoImp grupoFamiliarRepo = GrupoFamiliarDaoImp.getInstance();
 	
@@ -222,9 +221,9 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	}
 
 	@Override
-	public Optional<Alumno> findByDniYEscuela(String dni, Integer idEscuelaLogeada) {
+	public Optional<Alumno> findByDniYEscuela(String dni, Escuela escuelaLogeada) {
 		
-		return AlumnoDaoImp.getInstance().findByDniYEscuela(dni, idEscuelaLogeada);
+		return AlumnoDaoImp.getInstance().findByDniYEscuela(dni, escuelaLogeada);
 		
 	}
 

@@ -2,7 +2,7 @@ package mds.tp.becaalimentaria.gestores.dao;
 
 
 import java.util.Optional;
-import java.util.List;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +11,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.gestores.dao.interfaces.EscuelaDao;
 
