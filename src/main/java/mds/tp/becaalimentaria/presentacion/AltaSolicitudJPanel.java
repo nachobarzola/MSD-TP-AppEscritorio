@@ -11,6 +11,7 @@ import javax.swing.border.Border;
 
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.ClasificacionSolicitud;
+import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.domain.Solicitud;
 import mds.tp.becaalimentaria.gestores.GestorAlumno;
 import mds.tp.becaalimentaria.gestores.GestorSolicitud;
@@ -43,11 +44,12 @@ public class AltaSolicitudJPanel extends JPanel {
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 	private GestorSolicitud solicitudService = GestorSolicitud.getInstance();
 	private Alumno alumnoObtenido;
+	private Escuela escuelaLogeada;
 	private ClasificacionSolicitud clasificacionSolicitud;
 	Border bordeRojo = BorderFactory.createLineBorder(Color.red);
-	public AltaSolicitudJPanel(final MenuJFrame menuJFrame) {
+	public AltaSolicitudJPanel(final MenuJFrame menuJFrame, Escuela escuela) {
 		this.menuJFrame = menuJFrame;
-
+		this.escuelaLogeada = escuela;
 		// ----- LABEL ----//
 
 		setLayout(null);
@@ -179,7 +181,7 @@ public class AltaSolicitudJPanel extends JPanel {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Optional<Alumno> optAlumnoObtenido = alumnoService.findByDni(tfBusqueda.getText());
+				Optional<Alumno> optAlumnoObtenido = alumnoService.findByDniYEscuela(tfBusqueda.getText(),escuelaLogeada);
 				if(optAlumnoObtenido.isPresent()) {
 					alumnoObtenido = optAlumnoObtenido.get();
 					actualizarInterfaz(optAlumnoObtenido.get());

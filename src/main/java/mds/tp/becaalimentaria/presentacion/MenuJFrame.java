@@ -77,7 +77,7 @@ public class MenuJFrame extends JFrame {
 			break;
 		case 5: // Alta solicitud
 			this.setTitle("Agregar solicitud");
-			panelAltaSolicitud = new AltaSolicitudJPanel(this);
+			panelAltaSolicitud = new AltaSolicitudJPanel(this, null);
 			contentPane.add(panelAltaSolicitud, "5");
 			cardLayout.show(contentPane, "5");
 			break;
@@ -93,6 +93,19 @@ public class MenuJFrame extends JFrame {
 			panelAltaGrupoFamiliar = new AltaGrupoFamiliarJPanel(this,alumno);
 			contentPane.add(panelAltaGrupoFamiliar, "4");
 			cardLayout.show(contentPane, "4");
+			break;
+
+		}
+	}
+	
+	public void cambiarVentanaMenu(int n, Escuela escuelaLogeada) {
+		switch (n) {
+
+		case 5: // Alta solicitud
+			this.setTitle("Agregar solicitud");
+			panelAltaSolicitud = new AltaSolicitudJPanel(this, escuelaLogeada);
+			contentPane.add(panelAltaSolicitud, "5");
+			cardLayout.show(contentPane, "5");
 			break;
 
 		}

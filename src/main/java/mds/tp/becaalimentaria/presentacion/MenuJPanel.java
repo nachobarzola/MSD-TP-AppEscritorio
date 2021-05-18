@@ -29,7 +29,7 @@ public class MenuJPanel extends JPanel {
         JButton btnSolicitudes = new JButton("Solicitudes");
         btnSolicitudes.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		menuJFrame.cambiarVentanaMenu(5);
+        		menuJFrame.cambiarVentanaMenu(5,menuJFrame.getEscuelaLogeada());
         	}
         });
         btnSolicitudes.setBounds(261, 322, 116, 23);

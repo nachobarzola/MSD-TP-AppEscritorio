@@ -221,4 +221,11 @@ public class GestorAlumno implements GestorAlumnoInterface {
 		return ret;
 	}
 
+	@Override
+	public Optional<Alumno> findByDniYEscuela(String dni, Escuela escuelaLogeada) {
+		
+		return AlumnoDaoImp.getInstance().findByDniYEscuela(dni, escuelaLogeada);
+		
+	}
+
 }

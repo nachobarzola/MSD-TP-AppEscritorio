@@ -140,6 +140,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 	}
 
 	public void actualizarTablaProgenitor(GrupoFamiliar grupoFamiliar) {
+		
 		this.grupoFamiliarNuevo = grupoFamiliar;
 		Optional<GrupoFamiliar> grupoFamiliarReturn = alumnoService.getGrupoFamiliar(grupoFamiliar.getId());
 		List<ProgenitorTutor> listaProgenitorTutor = grupoFamiliarReturn.get().getListaProgenitorTutor();
