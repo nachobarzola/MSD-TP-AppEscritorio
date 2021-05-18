@@ -25,10 +25,6 @@ public class Solicitud {
 	private Integer id;
 	private Date fecha;
 	
-	@OneToOne
-	@JoinColumn(name="ID_BECAAPROBADA")
-	private BecaAprobada becaAprobada;
-	
 
 	@ManyToOne
 	@JoinColumn(name="ID_ALUMNO")
@@ -37,11 +33,10 @@ public class Solicitud {
 	private ClasificacionSolicitud clasificacionSolicitud;
 	
 	
-	public Solicitud(Date fecha, BecaAprobada becaAprobada, Alumno alumnoSolicitante,
+	public Solicitud(Date fecha, Alumno alumnoSolicitante,
 			ClasificacionSolicitud clasificacionSolicitud) {
 		super();
 		this.fecha = fecha;
-		this.becaAprobada = becaAprobada;
 		this.alumnoSolicitante = alumnoSolicitante;
 		this.clasificacionSolicitud = clasificacionSolicitud;
 	}
@@ -72,16 +67,6 @@ public class Solicitud {
 	}
 
 
-	public BecaAprobada getBecaAprobada() {
-		return becaAprobada;
-	}
-
-
-	public void setBecaAprobada(BecaAprobada becaAprobada) {
-		this.becaAprobada = becaAprobada;
-	}
-
-
 	public Alumno getAlumnoSolicitante() {
 		return alumnoSolicitante;
 	}
@@ -104,7 +89,7 @@ public class Solicitud {
 
 	@Override
 	public String toString() {
-		return "Solicitud [id=" + id + ", fecha=" + fecha + ", becaAprobada=" + becaAprobada + ", alumnoSolicitante="
+		return "Solicitud [id=" + id + ", fecha=" + fecha  + ", alumnoSolicitante="
 				+ alumnoSolicitante + ", clasificacionSolicitud=" + clasificacionSolicitud + "]";
 	}
 	

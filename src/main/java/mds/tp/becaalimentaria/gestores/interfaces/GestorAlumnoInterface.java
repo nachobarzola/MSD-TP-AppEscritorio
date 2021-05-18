@@ -46,8 +46,7 @@ public interface GestorAlumnoInterface {
 
 	public boolean comprobarExistencia(String dni);
 
-
-	public Optional<Alumno> findByDniYEscuela(String text, Escuela escuelaLogeada);
+	public Optional<Alumno> findByDniYEscuela(String dni, Integer idEscuelaLogeada);
 	
 	//public boolean comprobarExistencia(String dni);
 	

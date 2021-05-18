@@ -3,10 +3,8 @@ package mds.tp.becaalimentaria.gestores;
 import java.util.Optional;
 
 import mds.tp.becaalimentaria.domain.Alumno;
-import mds.tp.becaalimentaria.domain.BecaAprobada;
 import mds.tp.becaalimentaria.domain.ClasificacionSolicitud;
 import mds.tp.becaalimentaria.domain.Solicitud;
-import mds.tp.becaalimentaria.gestores.dao.BecaAprobadaDaoImp;
 import mds.tp.becaalimentaria.gestores.dao.SolicitudDaoImp;
 import mds.tp.becaalimentaria.gestores.interfaces.GestorSolicitudInterface;
 
@@ -26,8 +24,6 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 	private SolicitudDaoImp solicitudRepo= SolicitudDaoImp.getInstance();
 
 
-	private BecaAprobadaDaoImp becaAprobadaRepo= BecaAprobadaDaoImp.getInstance();
-
 	
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 
@@ -43,24 +39,6 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 		return Optional.empty();
 	}
 
-	/*
-	 * Metodo que se encarga de agregarle a una solicitud una becaAprobada, luego
-	 * persiste los datos.
-	 */
-	@Override
-	public Optional<Solicitud> agregarBecaAprobada(Solicitud solicitud, BecaAprobada becaAprobada) {
-		if (becaAprobadaRepo.save(becaAprobada) != null) {
-			solicitud.setBecaAprobada(becaAprobada);
-			becaAprobada.setSolicitud(solicitud);
-			// Solicitud es dueña de la relacion por lo tanto la guarda
-			Solicitud solicitudReturn = solicitudRepo.save(solicitud);
-			if (solicitudReturn != null) {
-				return Optional.of(solicitudReturn);
-			}
-		}
-		return Optional.empty();
-		
-	}
 
 	/*
 	 * Metodo que se encarga de clasificar una solicitud. La solicitud debe tener un

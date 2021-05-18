@@ -181,7 +181,7 @@ public class AltaSolicitudJPanel extends JPanel {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Optional<Alumno> optAlumnoObtenido = alumnoService.findByDniYEscuela(tfBusqueda.getText(),escuelaLogeada);
+				Optional<Alumno> optAlumnoObtenido = alumnoService.findByDniYEscuela(tfBusqueda.getText(),escuelaLogeada.getId());
 				if(optAlumnoObtenido.isPresent()) {
 					alumnoObtenido = optAlumnoObtenido.get();
 					actualizarInterfaz(optAlumnoObtenido.get());

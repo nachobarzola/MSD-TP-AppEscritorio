@@ -222,9 +222,9 @@ public class GestorAlumno implements GestorAlumnoInterface {
 	}
 
 	@Override
-	public Optional<Alumno> findByDniYEscuela(String dni, Escuela escuelaLogeada) {
+	public Optional<Alumno> findByDniYEscuela(String dni, Integer idEscuelaLogeada) {
 		
-		return AlumnoDaoImp.getInstance().findByDniYEscuela(dni, escuelaLogeada);
+		return AlumnoDaoImp.getInstance().findByDniYEscuela(dni, idEscuelaLogeada);
 		
 	}
 
