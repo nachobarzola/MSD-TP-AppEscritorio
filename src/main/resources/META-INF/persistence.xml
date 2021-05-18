@@ -17,7 +17,6 @@ mapped to database tables. Database driver, location, userid and pw
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!-- Define the object that should be persisted in the database -->
         <class>mds.tp.becaalimentaria.domain.Alumno</class>
-        <class>mds.tp.becaalimentaria.domain.BecaAprobada</class>
         <class>mds.tp.becaalimentaria.domain.Direccion</class>
         <class>mds.tp.becaalimentaria.domain.EnfermedadCronica</class>
         <class>mds.tp.becaalimentaria.domain.Escuela</class>
