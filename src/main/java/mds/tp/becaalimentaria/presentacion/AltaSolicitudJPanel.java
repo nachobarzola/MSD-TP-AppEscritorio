@@ -173,7 +173,7 @@ public class AltaSolicitudJPanel extends JPanel {
 		add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AltaSolicitudJPanel.this.menuJFrame.cambiarVentanaMenu(1);
+				AltaSolicitudJPanel.this.menuJFrame.cambiarVentanaMenu(5,escuelaLogeada);
 			}
 		});
 		
