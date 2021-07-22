@@ -43,7 +43,7 @@ public class MenuJFrame extends JFrame {
 		Dimension dimPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = dimPantalla.height;
 		int width = dimPantalla.width;
-		setSize((int)(width*0.35),(int)(height*0.90));
+		setSize((int)(width*0.45),(int)(height*0.90));
 		
 		setLocationRelativeTo(null); //Centra el jframe en la pantalla
 		//---------------------------------------------

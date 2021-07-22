@@ -1,9 +1,11 @@
 package mds.tp.becaalimentaria.gestores;
 
+import java.util.List;
 import java.util.Optional;
 
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.ClasificacionSolicitud;
+import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.domain.Solicitud;
 import mds.tp.becaalimentaria.gestores.dao.SolicitudDaoImp;
 import mds.tp.becaalimentaria.gestores.interfaces.GestorSolicitudInterface;
@@ -102,6 +104,11 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 		} else {
 			return ClasificacionSolicitud.SolicitudEnEstudio;
 		}
+	}
+
+	@Override
+	public List<Solicitud> getAllSolicitudes(Escuela escuela) {
+		return solicitudRepo.findByAllSolicitud(escuela);
 	}
 
 }

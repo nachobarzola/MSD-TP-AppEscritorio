@@ -1,5 +1,7 @@
 package mds.tp.becaalimentaria.gestores.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -7,7 +9,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
+import mds.tp.becaalimentaria.domain.Alumno;
+import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.domain.Solicitud;
 import mds.tp.becaalimentaria.gestores.dao.interfaces.SolicitudDao;
 
@@ -63,6 +68,27 @@ public class SolicitudDaoImp implements SolicitudDao{
 			em.close();
 		}
 		return Optional.of(solicitud);
+	}
+	@Override
+	public List<Solicitud> findByAllSolicitud(Escuela escuela) {
+		EntityManager em = emf.createEntityManager();
+		//String query = "SELECT s FROM Solicitud s WHERE s.alumnoSolicitante=:alum";
+		String query = "SELECT s FROM Solicitud s "
+				+ "INNER JOIN Alumno a ON s.alumnoSolicitante=a "
+				+ "WHERE a.escuela=:esc";
+		TypedQuery<Solicitud> tq = em.createQuery(query, Solicitud.class);
+		tq.setParameter("esc", escuela);
+		List<Solicitud> listaSolic = null;
+		try {
+			listaSolic = tq.getResultList();
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+		} finally {
+			em.close();
+		}
+		ArrayList<Solicitud> listaSolic2 = new ArrayList<Solicitud>();
+		listaSolic2.addAll(listaSolic);
+		return listaSolic2;
 	}
 	
 

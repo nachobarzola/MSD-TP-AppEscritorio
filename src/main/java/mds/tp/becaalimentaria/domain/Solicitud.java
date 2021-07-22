@@ -85,11 +85,5 @@ public class Solicitud {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Solicitud [id=" + id + ", fecha=" + fecha  + ", alumnoSolicitante="
-				+ alumnoSolicitante + ", clasificacionSolicitud=" + clasificacionSolicitud + "]";
-	}
-	
 	
 }

@@ -54,46 +54,46 @@ public class AltaSolicitudJPanel extends JPanel {
 
 		setLayout(null);
 		lblTituloBusqueda = new JLabel("Ingrese el número de documento del alumno");
-		lblTituloBusqueda.setBounds(249, 89, 300, 20);
+		lblTituloBusqueda.setBounds(86, 55, 300, 20);
 		add(lblTituloBusqueda);
 
 		lblTituloDatos = new JLabel("Datos del alumno");
-		lblTituloDatos.setBounds(309, 164, 250, 20);
+		lblTituloDatos.setBounds(146, 130, 250, 20);
 		lblTituloDatos.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblTituloDatos);
 
 		lblDni = new JLabel("Documento");
-		lblDni.setBounds(269, 214, 100, 20);
+		lblDni.setBounds(106, 180, 100, 20);
 		lblDni.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblDni);
 
 		lblDniValor = new JLabel(""); // traer de la BD
-		lblDniValor.setBounds(349, 214, 200, 20);
+		lblDniValor.setBounds(186, 180, 200, 20);
 		lblDniValor.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblDniValor);
 
 		lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(269, 254, 100, 20);
+		lblNombre.setBounds(106, 220, 100, 20);
 		lblNombre.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblNombre);
 
 		lblNombreValor = new JLabel(""); // traer de la BD
-		lblNombreValor.setBounds(349, 254, 200, 20);
+		lblNombreValor.setBounds(186, 220, 200, 20);
 		lblNombreValor.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblNombreValor);
 
 		lblApellido = new JLabel("Apellido");
-		lblApellido.setBounds(269, 294, 100, 20);
+		lblApellido.setBounds(106, 260, 100, 20);
 		lblApellido.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblApellido);
 
 		lblApellidoValor = new JLabel(""); // traer de la BD
-		lblApellidoValor.setBounds(349, 294, 200, 20);
+		lblApellidoValor.setBounds(186, 260, 200, 20);
 		lblApellidoValor.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(lblApellidoValor);
 
 		lblEstadoSolic = new JLabel("Solicitud:"); // traer de la BD
-		lblEstadoSolic.setBounds(309, 394, 200, 20);
+		lblEstadoSolic.setBounds(146, 360, 200, 20);
 		lblEstadoSolic.setVisible(true); // habilitar si se encuentra el alumno en la BD
 
 		add(lblEstadoSolic);
@@ -101,7 +101,7 @@ public class AltaSolicitudJPanel extends JPanel {
 		// ---- TEXTFIELD ----//
 
 		tfBusqueda = new JTextField();
-		tfBusqueda.setBounds(289, 124, 150, 20);
+		tfBusqueda.setBounds(126, 90, 150, 20);
 		add(tfBusqueda);
 		//Validacion ingreso de solo numeros y hasta 8 digitos
 		tfBusqueda.addKeyListener(new KeyAdapter() { 
@@ -131,7 +131,7 @@ public class AltaSolicitudJPanel extends JPanel {
 				btnCrearSolicitud.setEnabled(true);
 			}
 		});
-		btnConsultar.setBounds(289, 344, 150, 20);
+		btnConsultar.setBounds(126, 310, 150, 20);
 		btnConsultar.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(btnConsultar);
 
@@ -164,12 +164,12 @@ public class AltaSolicitudJPanel extends JPanel {
 				
 			}
 		});
-		btnCrearSolicitud.setBounds(369, 434, 140, 20);
+		btnCrearSolicitud.setBounds(206, 400, 140, 20);
 		btnCrearSolicitud.setVisible(true); // habilitar si se encuentra el alumno en la BD
 		add(btnCrearSolicitud);
 
 		btnAtras = new JButton("Atrás");
-		btnAtras.setBounds(249, 434, 100, 20);
+		btnAtras.setBounds(86, 400, 100, 20);
 		add(btnAtras);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -198,7 +198,7 @@ public class AltaSolicitudJPanel extends JPanel {
 				
 			}
 		});
-		btnBuscar.setBounds(449, 123, 89, 23);
+		btnBuscar.setBounds(286, 89, 89, 23);
 		add(btnBuscar);
 		btnConsultar.setEnabled(false);
 
