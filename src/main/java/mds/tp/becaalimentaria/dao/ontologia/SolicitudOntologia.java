@@ -15,18 +15,34 @@ import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryException;
 
 import mds.tp.becaalimentaria.domain.Solicitud;
+import mds.tp.becaalimentaria.gestores.GestorSolicitudOntologia;
 import mds.tp.becaalimentaria.util.UpdateUtil;
 
 public class SolicitudOntologia {
 	// TODO: ver que no se llama a esta constante en el codigo
 	private String PREFIJO_ONTOLOGIA = "PREFIX base: <http://www.semanticweb.org/bruno/ontologies/2021/5/untitled-ontology-4#>";
 	private RepositoryConnection connection;
+	
+	private static SolicitudOntologia _INSTANCE;
+	public static SolicitudOntologia getInstance(RepositoryConnection connection) {
+		if (_INSTANCE == null) {
+			_INSTANCE = new SolicitudOntologia(connection);
+		}
+		_INSTANCE.setConnection(connection);
+		return _INSTANCE;
+	}
+	
+	
+	private SolicitudOntologia(RepositoryConnection connection) {
+		this.connection = connection;
+	}
+	
+	
 
-	public SolicitudOntologia(RepositoryConnection connection) {
+	private void setConnection(RepositoryConnection connection) {
 		this.connection = connection;
 	}
 
-	
 	public void listarSolicitudes() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		try {
 			// Preparing a SELECT query for later evaluation

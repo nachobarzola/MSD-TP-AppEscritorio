@@ -15,6 +15,7 @@ import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.domain.Solicitud;
 import mds.tp.becaalimentaria.gestores.GestorAlumno;
 import mds.tp.becaalimentaria.gestores.GestorSolicitud;
+import mds.tp.becaalimentaria.gestores.GestorSolicitudOntologia;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -43,10 +44,14 @@ public class AltaSolicitudJPanel extends JPanel {
 	private MenuJFrame menuJFrame;
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 	private GestorSolicitud solicitudService = GestorSolicitud.getInstance();
+	private GestorSolicitudOntologia solicitudOntoService = GestorSolicitudOntologia.getInstance();
 	private Alumno alumnoObtenido;
 	private Escuela escuelaLogeada;
 	private ClasificacionSolicitud clasificacionSolicitud;
 	Border bordeRojo = BorderFactory.createLineBorder(Color.red);
+	
+	
+	
 	public AltaSolicitudJPanel(final MenuJFrame menuJFrame, Escuela escuela) {
 		this.menuJFrame = menuJFrame;
 		this.escuelaLogeada = escuela;
@@ -146,8 +151,13 @@ public class AltaSolicitudJPanel extends JPanel {
 				solicitudNueva.setAlumnoSolicitante(alumnoObtenido);
 				solicitudNueva.setClasificacionSolicitud(clasificacionSolicitud);
 				if((solicitudService.guardarSolicitud(solicitudNueva)).isPresent()) {
+					//La insertamos en la ontologia tambien
+					solicitudOntoService.guardarSolicitudEnOntologia(solicitudNueva);
+					//----------------------------------------------------------------
+					//TODO: SOlo a modo debug
+					solicitudOntoService.showLogSolicitudAllOnto();
 					
-					
+					//----------------------------------------------------------------
 					String text = "La solicitud se creó satisfactoriamente";
 				    String title = "Exito";
 				    int optionType = JOptionPane.DEFAULT_OPTION;

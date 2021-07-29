@@ -13,13 +13,15 @@ public class GestorSolicitudOntologia implements GestorSolicitudOntologiaInterfa
 	private HTTPRepository repository;
 	private SolicitudOntologia solicitudOntologia;
 	
-	private String PATH_REPOSITORY_ONTOLOGIA ="http://localhost:7200/repositories/tpOntologias";
+	private static String PATH_REPOSITORY_ONTOLOGIA ="http://Notebook-N:7200/repositories/TpOntologias";
 
 	public static GestorSolicitudOntologia getInstance() {
 		if (_INSTANCE == null) {
 			_INSTANCE = new GestorSolicitudOntologia();
+			_INSTANCE.repository  = new HTTPRepository(PATH_REPOSITORY_ONTOLOGIA);
 			_INSTANCE.crearConexionOntologia();
 		}
+		_INSTANCE.crearConexionOntologia();
 		return _INSTANCE;
 	}
 
@@ -30,10 +32,9 @@ public class GestorSolicitudOntologia implements GestorSolicitudOntologiaInterfa
 	
 
 	private void crearConexionOntologia() {
-		// Gestion de la conexion
-		repository = new HTTPRepository(PATH_REPOSITORY_ONTOLOGIA);
+		// Gestion de la conexion	
         RepositoryConnection connection = repository.getConnection();
-		solicitudOntologia = new SolicitudOntologia(connection);				
+		solicitudOntologia = SolicitudOntologia.getInstance(connection);				
 	}
 	
 	@Override
@@ -49,7 +50,7 @@ public class GestorSolicitudOntologia implements GestorSolicitudOntologiaInterfa
 	public void showLogSolicitudAllOnto() {
 		solicitudOntologia.listarSolicitudes();
 	}
-	
+
 	
 	
 	
