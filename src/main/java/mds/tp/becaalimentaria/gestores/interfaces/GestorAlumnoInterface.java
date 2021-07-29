@@ -1,7 +1,7 @@
 package mds.tp.becaalimentaria.gestores.interfaces;
 
 import java.util.Optional;
-import java.util.List;
+
 
 import mds.tp.becaalimentaria.domain.Alumno;
 import mds.tp.becaalimentaria.domain.Direccion;
@@ -9,7 +9,6 @@ import mds.tp.becaalimentaria.domain.EnfermedadCronica;
 import mds.tp.becaalimentaria.domain.Escuela;
 import mds.tp.becaalimentaria.domain.GrupoFamiliar;
 import mds.tp.becaalimentaria.domain.Hermano;
-import mds.tp.becaalimentaria.domain.ProgenitorTutor;
 
 
 public interface GestorAlumnoInterface {

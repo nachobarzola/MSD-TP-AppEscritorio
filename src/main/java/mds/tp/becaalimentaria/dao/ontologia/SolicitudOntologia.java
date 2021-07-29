@@ -15,11 +15,9 @@ import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryException;
 
 import mds.tp.becaalimentaria.domain.Solicitud;
-import mds.tp.becaalimentaria.gestores.GestorSolicitudOntologia;
 import mds.tp.becaalimentaria.util.UpdateUtil;
 
 public class SolicitudOntologia {
-	// TODO: ver que no se llama a esta constante en el codigo
 	private String PREFIJO_ONTOLOGIA = "PREFIX base: <http://www.semanticweb.org/bruno/ontologies/2021/5/untitled-ontology-4#>";
 	private RepositoryConnection connection;
 	
@@ -113,8 +111,8 @@ public class SolicitudOntologia {
 		// We interpolate the URIs inside the string as INSERT DATA may not contain
 		// variables (bindings)
 		UpdateUtil.executeUpdate(connection,
-				String.format("PREFIX base: <http://www.semanticweb.org/bruno/ontologies/2021/5/untitled-ontology-4#>"
-						+ "INSERT DATA {" + "<%s> base:idSolicitud " + id + "." + "<%s> base:cantidadHermanos "
+				String.format(PREFIJO_ONTOLOGIA + "INSERT DATA {" + "<%s> base:idSolicitud " + id + "." 
+						+ "<%s> base:cantidadHermanos "
 						+ cantidadHermanos + "." + "<%s> base:IngresoFamiliarTotal " + "\"" + ingresoFamiliarTotal
 						+ "\"" + "^^xsd:double" + "." + "<%s> rdf:type base:Solicitud " + "}", solicitudURI,
 						solicitudURI, solicitudURI, solicitudURI));
