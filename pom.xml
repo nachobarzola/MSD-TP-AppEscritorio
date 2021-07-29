@@ -17,6 +17,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
+		<gdb.version>9.8.0</gdb.version>
 	</properties>
 
 	<dependencies>
@@ -49,7 +50,12 @@
 			<artifactId>jcalendar</artifactId>
 			<version>1.4</version>
 		</dependency>
-
+		<!-- Ontologia -->
+		<dependency>
+			<groupId>com.ontotext.graphdb</groupId>
+			<artifactId>graphdb-free-runtime</artifactId>
+			<version>${gdb.version}</version>
+		</dependency>
 
 
 	</dependencies>

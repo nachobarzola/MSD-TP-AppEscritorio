@@ -1,6 +1,6 @@
 package mds.tp.becaalimentaria;
 
-import mds.tp.becaalimentaria.presentacion.AltaGrupoFamiliarJPanel;
+
 import mds.tp.becaalimentaria.presentacion.Login;
 
 /**
