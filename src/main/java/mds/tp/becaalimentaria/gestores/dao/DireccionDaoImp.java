@@ -1,9 +1,13 @@
 package mds.tp.becaalimentaria.gestores.dao;
 
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+
 
 import mds.tp.becaalimentaria.domain.Direccion;
 import mds.tp.becaalimentaria.gestores.dao.interfaces.DireccionDao;
@@ -47,4 +51,22 @@ public class DireccionDaoImp implements DireccionDao{
 		}
 	}
 
+	@Override
+	public Optional<Direccion> findById(Integer idDireccion) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = null;
+		Direccion direccion = null;
+		try {
+			et = em.getTransaction();
+			et.begin();
+			direccion = em.find(Direccion.class, idDireccion);
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return Optional.of(direccion);
+	}
+	
+	
 }
