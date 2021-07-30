@@ -39,6 +39,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		setLayout(null);
 		this.menuJFrame = frame;
 		this.altaGrupoFamiliarJPanel = this;
+		
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(56, 107, 500, 104);
@@ -91,7 +92,7 @@ public class AltaGrupoFamiliarJPanel extends JPanel {
 		add(btnAgregarEnfermedadCronica);
 
 		JButton btnFinalizar = new JButton("Finalizar");
-		btnFinalizar.setBounds(285, 679, 89, 23);
+		btnFinalizar.setBounds(282, 601, 89, 23);
 		add(btnFinalizar);
 
 		btnAgregarEnfermedadCronica.addActionListener(new ActionListener() {
