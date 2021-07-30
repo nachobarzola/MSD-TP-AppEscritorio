@@ -32,9 +32,10 @@ public class GestorSolicitudOntologia implements GestorSolicitudOntologiaInterfa
 	
 
 	private void crearConexionOntologia() {
-		// Gestion de la conexion	
+		// Gestion de la conexion
         RepositoryConnection connection = repository.getConnection();
-		solicitudOntologia = SolicitudOntologia.getInstance(connection);				
+		solicitudOntologia = SolicitudOntologia.getInstance(connection);
+		System.out.println("Se creo una nueva conexion: "+connection.toString());
 	}
 	
 	@Override

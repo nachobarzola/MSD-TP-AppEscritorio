@@ -20,13 +20,11 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 		return _INSTANCE;
 	}
 
-	private GestorSolicitud() {}
+	private GestorSolicitud() {
+	}
 
-	
-	private SolicitudDaoImp solicitudRepo= SolicitudDaoImp.getInstance();
+	private SolicitudDaoImp solicitudRepo = SolicitudDaoImp.getInstance();
 
-
-	
 	private GestorAlumno alumnoService = GestorAlumno.getInstance();
 
 	@Override
@@ -36,11 +34,15 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 		}
 		Solicitud solicitudGuar = solicitudRepo.save(solicitud);
 		if (solicitudGuar != null) {
+			// La insertamos en la ontologia tambien
+			GestorSolicitudOntologia.getInstance().guardarSolicitudEnOntologia(solicitud);
+			// ----------------------------------------------------------------
+			//Imprime en el log las solicitudes de la ontologia
+			GestorSolicitudOntologia.getInstance().showLogSolicitudAllOnto();
 			return Optional.of(solicitudGuar);
 		}
 		return Optional.empty();
 	}
-
 
 	/*
 	 * Metodo que se encarga de clasificar una solicitud. La solicitud debe tener un
@@ -68,7 +70,7 @@ public class GestorSolicitud implements GestorSolicitudInterface {
 		Integer cantidadHermanos = alumnoService.getCantidadHermanos(alumnoSolicitante);
 
 		return analizarSolicitud(diferenciaIngresoGasto, cantidadHermanos);
-	
+
 	}
 
 	/*
