@@ -12,8 +12,12 @@ import mds.tp.becaalimentaria.gestores.dao.EscuelaDaoImp;
 
 public class GestorEscuelaTest {
 	
+	/*-------------------Services---------------*/
 	private GestorEscuela escuelaService = GestorEscuela.getInstance();
+	/*-------------------Repositories---------------*/
 	private EscuelaDaoImp escuelaRepo = EscuelaDaoImp.getInstance();
+	
+	
 
 	@Test
 	public void guardar_buscar_escuela() {
