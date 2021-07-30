@@ -35,7 +35,7 @@ public class GestorSolicitudTest {
 	private SolicitudDaoImp solicitudRepo = SolicitudDaoImp.getInstance();
 
 	
-	@Test
+	@Ignore
 	public void guardar_solicitud() {
 		//--------------ESCUELA
 		Escuela escuela = new Escuela();

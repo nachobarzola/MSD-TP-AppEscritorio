@@ -34,7 +34,7 @@ public class GestorAlumnoTest {
 	private AlumnoDaoImp alumnoRepo = AlumnoDaoImp.getInstance();
 	
 
-	@Test
+	@Ignore
 	public void guardar_direccion() {
 		Direccion direccion = new Direccion("Ramirez 896", "Lucas Gonzalez", "3158");
 		Optional<Direccion> optDireccion = alumnoService.guardarDireccion(direccion);
@@ -44,7 +44,7 @@ public class GestorAlumnoTest {
 		assertTrue(optDireccionBuscada.isPresent());
 	}
 
-	@Test
+	@Ignore
 	public void actualizar_alumno() {
 		/*-------------------------------Cosas previas*/
 		// --------------ESCUELA
