@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import mds.tp.becaalimentaria.domain.Escuela;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class MenuSolicitudJPanel extends JPanel {
 
@@ -20,7 +22,8 @@ public class MenuSolicitudJPanel extends JPanel {
 		setLayout(null);
 		
 		JButton btnNuevaSolicitud = new JButton("Nueva solicitud");
-		btnNuevaSolicitud.setBounds(142, 74, 145, 23);
+		btnNuevaSolicitud.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNuevaSolicitud.setBounds(205, 156, 145, 23);
 		add(btnNuevaSolicitud);
 		
 		btnNuevaSolicitud.addActionListener(new ActionListener() {
@@ -32,7 +35,8 @@ public class MenuSolicitudJPanel extends JPanel {
 		});
 		
 		btnAtras = new JButton("Atrás");
-		btnAtras.setBounds(142, 266, 145, 23);
+		btnAtras.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAtras.setBounds(205, 348, 145, 23);
 		this.add(btnAtras);
 		
 		btnAtras.addActionListener(new ActionListener() {
@@ -42,8 +46,14 @@ public class MenuSolicitudJPanel extends JPanel {
 		});
 		
 		JButton btnListarSolicitudes = new JButton("Listar solicitudes");
-		btnListarSolicitudes.setBounds(142, 123, 145, 23);
+		btnListarSolicitudes.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnListarSolicitudes.setBounds(205, 205, 145, 23);
 		add(btnListarSolicitudes);
+		
+		JLabel lblNewLabel = new JLabel("MENU SOLICITUDES");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel.setBounds(194, 65, 177, 35);
+		add(lblNewLabel);
 		
 		btnListarSolicitudes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
