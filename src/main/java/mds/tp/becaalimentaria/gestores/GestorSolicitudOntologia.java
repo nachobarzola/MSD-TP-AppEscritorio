@@ -42,7 +42,8 @@ public class GestorSolicitudOntologia implements GestorSolicitudOntologiaInterfa
 	public void guardarSolicitudEnOntologia(Solicitud solicitud) {
 		//Datos requeridos
 		Integer cantHermanos = alumnoService.getCantidadHermanos(solicitud.getAlumnoSolicitante());
-		Double ingresoFamiliarTotal = alumnoService.getIngresoFamiliarTotal(solicitud.getAlumnoSolicitante());
+		Double ingresoFamiliarTotal = alumnoService.getIngresoFamiliarTotal(solicitud.getAlumnoSolicitante())
+				-alumnoService.getGastoEnfermedadCronica(solicitud.getAlumnoSolicitante());
 		//Insertamos la solicitud en la ontologia
 		solicitudOntologia.addSolicitud(solicitud,cantHermanos, ingresoFamiliarTotal);
 	}

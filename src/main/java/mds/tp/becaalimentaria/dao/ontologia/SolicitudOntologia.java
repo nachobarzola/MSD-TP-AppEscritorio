@@ -96,7 +96,7 @@ public class SolicitudOntologia {
 	}
 
 	
-	public void addSolicitud(Solicitud solicitud, Integer cantidadHermanos, Double ingresoFamiliarTotal) throws MalformedQueryException, RepositoryException, UpdateExecutionException {
+	public void addSolicitud(Solicitud solicitud, Integer cantidadHermanos, Double ingresoFamiliarTotalNeto) throws MalformedQueryException, RepositoryException, UpdateExecutionException {
 		String nombreSolicitud="Solicitud"+solicitud.getId();
 		
 		
@@ -113,7 +113,7 @@ public class SolicitudOntologia {
 		UpdateUtil.executeUpdate(connection,
 				String.format(PREFIJO_ONTOLOGIA + "INSERT DATA {" + "<%s> base:idSolicitud " + id + "." 
 						+ "<%s> base:cantidadHermanos "
-						+ cantidadHermanos + "." + "<%s> base:IngresoFamiliarTotal " + "\"" + ingresoFamiliarTotal
+						+ cantidadHermanos + "." + "<%s> base:IngresoFamiliarTotal " + "\"" + ingresoFamiliarTotalNeto
 						+ "\"" + "^^xsd:double" + "." + "<%s> rdf:type base:Solicitud " + "}", solicitudURI,
 						solicitudURI, solicitudURI, solicitudURI));
 
